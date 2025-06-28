@@ -1,8 +1,0 @@
-.openapi-generator-ignore
-README.md
-pom.xml
-src/main/java/br/com/jstack/syst/acrn/registry/api/ApiUtil.java
-src/main/java/br/com/jstack/syst/acrn/registry/api/SystemAcronymControllerApi.java
-src/main/java/br/com/jstack/syst/acrn/registry/model/SystemAcronymErrorResponse.java
-src/main/java/br/com/jstack/syst/acrn/registry/model/SystemAcronymRequest.java
-src/main/java/br/com/jstack/syst/acrn/registry/model/SystemAcronymResponse.java
