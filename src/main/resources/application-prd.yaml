@@ -1,13 +1,13 @@
 spring:
   config:
     activate:
-      on-profile: local
+      on-profile: prd
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/jstack_system_acronym
+    url: ${DB_URL}
     driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: postgres
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     hikari:
       minimum-idle: 5
       maximum-pool-size: 20
@@ -16,12 +16,11 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: true
-    open-in-view: false
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
   liquibase:
     change-log: classpath:db/changelog/000-master.xml
@@ -33,7 +32,7 @@ server:
     session:
       cookie:
         http-only: true
-        secure: false
+        secure: true
 
 management:
   server:
