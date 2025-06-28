@@ -1,0 +1,309 @@
+openapi: 3.0.3
+info:
+  title: spring-atomic-syst-acrn-registry
+  version: v1
+servers:
+  - url: https://system-acronym-registry.appdes.bvnet.bv
+    description: DES
+  - url: https://system-acronym-registry.appuat.bvnet.bv
+    description: UAT
+  - url: https://system-acronym-registry.app.bvnet.bv
+    description: PRD
+tags:
+  - name: SystemAcronymController
+paths:
+  /v1/system-acronyms:
+    get:
+      tags:
+        - SystemAcronymController
+      summary: List system acronyms
+      operationId: listSystemAcronyms
+      parameters:
+        - name: active
+          in: query
+          schema:
+            type: boolean
+        - name: typeId
+          in: query
+          schema:
+            type: integer
+        - name: domainId
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of system acronyms
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SystemAcronymResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAcronymErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAcronymErrorResponse'
+      security:
+        - bearerAuth: [ ]
+
+    post:
+      tags:
+        - SystemAcronymController
+      summary: Create a system acronym
+      operationId: createSystemAcronym
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SystemAcronymRequest'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAcronymErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAcronymErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAcronymErrorResponse'
+      security:
+        - bearerAuth: [ ]
+
+  /v1/system-acronyms/{id}:
+    get:
+      tags:
+        - SystemAcronymController
+      summary: Get system acronym by ID
+      operationId: getSystemAcronym
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: System acronym details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAcronymResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAcronymErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAcronymErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAcronymErrorResponse'
+      security:
+        - bearerAuth: [ ]
+
+    put:
+      tags:
+        - SystemAcronymController
+      summary: Update system acronym
+      operationId: updateSystemAcronym
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SystemAcronymRequest'
+      responses:
+        '200':
+          description: Updated successfully
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAcronymErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAcronymErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAcronymErrorResponse'
+      security:
+        - bearerAuth: [ ]
+
+    delete:
+      tags:
+        - SystemAcronymController
+      summary: Soft delete a system acronym
+      operationId: deleteSystemAcronym
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Deleted
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAcronymErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAcronymErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAcronymErrorResponse'
+      security:
+        - bearerAuth: [ ]
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    SystemAcronymRequest:
+      type: object
+      required:
+        - acronym
+        - name
+        - domain_id
+        - type_id
+      properties:
+        acronym:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        domain_id:
+          type: integer
+        type_id:
+          type: integer
+        owner_user_id:
+          type: integer
+        dev_team_id:
+          type: integer
+        biz_team_id:
+          type: integer
+        product_owner_name:
+          type: string
+        contact_email:
+          type: string
+        critical_for_operation:
+          type: boolean
+        has_personal_data:
+          type: boolean
+        security_level:
+          type: string
+        compliance_requirements:
+          type: string
+        documentation_url:
+          type: string
+        lifecycle_status:
+          type: string
+        go_live_date:
+          type: string
+          format: date
+        sunset_date:
+          type: string
+          format: date
+        active:
+          type: boolean
+        created_by:
+          type: string
+
+    SystemAcronymResponse:
+      allOf:
+        - $ref: '#/components/schemas/SystemAcronymRequest'
+        - type: object
+          properties:
+            id:
+              type: integer
+            created_at:
+              type: string
+              format: date-time
+            updated_by:
+              type: string
+            updated_at:
+              type: string
+              format: date-time
+
+    SystemAcronymErrorResponse:
+      type: object
+      required:
+        - timestamp
+        - status
+        - error
+        - message
+        - path
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          example: "2025-06-25T12:34:56Z"
+        status:
+          type: integer
+          example: 400
+        error:
+          type: string
+          example: "Bad Request"
+        message:
+          type: string
+          example: "Invalid input data"
+        path:
+          type: string
+          example: "/v1/system-acronyms"
+
