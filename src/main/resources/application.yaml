@@ -30,7 +30,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
   liquibase:
-    change-log: classpath:db/changelog/master.xml
+    change-log: classpath:db/changelog/000-master.xml
     enabled: true
 
 server:

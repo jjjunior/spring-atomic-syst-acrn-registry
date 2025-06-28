@@ -1,4 +1,4 @@
-package br.com.jstack.syst.acrn.registry.exception;
+package br.com.jstack.syst.acrn.registry.framework.exception;
 
 import java.time.Instant;
 import java.util.HashMap;

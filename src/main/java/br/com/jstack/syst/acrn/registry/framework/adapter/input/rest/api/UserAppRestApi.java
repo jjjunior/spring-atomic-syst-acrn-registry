@@ -1,4 +1,4 @@
-package br.com.jstack.syst.acrn.registry.adapter.input.api;
+package br.com.jstack.syst.acrn.registry.framework.adapter.input.rest.api;
 
 import br.com.jstack.syst.acrn.registry.api.UserAppApi;
 import br.com.jstack.syst.acrn.registry.model.UserAppRequest;

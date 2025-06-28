@@ -14,7 +14,7 @@
 
     <properties>
         <package>${project.groupId}.registry</package>
-        <openapi.inputSpec>${project.basedir}/src/main/resources/contractapi/provider/spring-atomic-syst-acrn-registry.yaml</openapi.inputSpec>
+        <openapi.inputSpec>${project.basedir}/src/main/resources/api/contract/spring-atomic-syst-acrn-registry.yaml</openapi.inputSpec>
     </properties>
 
     <dependencies>
