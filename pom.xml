@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>br.com.jstack.platform</groupId>
+        <artifactId>starter-atomic-spring-boot</artifactId>
+        <version>1.0.7-SNAPSHOT</version>
+    </parent>
+
+    <groupId>br.com.jstack.syst.acrn</groupId>
+    <artifactId>spring-atomic-syst-acrn-registry</artifactId>
+    <name>spring-atomic-syst-acrn-registry</name>
+    <version>0.0.1</version>
+
+    <properties>
+        <package>${project.groupId}.registry</package>
+        <openapi.inputSpec>${project.basedir}/src/main/resources/contractapi/provider/spring-atomic-syst-acrn-registry.yaml</openapi.inputSpec>
+    </properties>
+
+    <dependencies>
+        <!--     inclua as dependencias especificas do seu projeto aqui-->
+    </dependencies>
+
+
+</project>
