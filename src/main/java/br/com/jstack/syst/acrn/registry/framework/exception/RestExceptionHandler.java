@@ -28,7 +28,7 @@ public class RestExceptionHandler {
 			.getFieldErrors()
 			.stream()
 			.map(f -> f.getField() + ": " + f.getDefaultMessage())
-			.collect(Collectors.toList());
+			.toList();
 		
 		String message = "Validation error on request body";
 		
