@@ -1,4 +1,7 @@
-package br.com.jstack.syst.acrn.registry.framework.adapter.input.rest.api;
+package br.com.jstack.syst.acrn.registry.framework.adapter.input.rest;
+
+import java.util.List;
+import java.util.Optional;
 
 import br.com.jstack.syst.acrn.registry.api.ResponsibilityTypeApi;
 import br.com.jstack.syst.acrn.registry.model.ResponsibilityTypeRequest;
@@ -7,11 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.NativeWebRequest;
 
-import java.util.List;
-import java.util.Optional;
-
 @RestController
-public class ResponsibilityTypeRestApi implements ResponsibilityTypeApi {
+public class ResponsibilityTypeRestAdapter implements ResponsibilityTypeApi {
     @Override
     public Optional<NativeWebRequest> getRequest() {
         return ResponsibilityTypeApi.super.getRequest();

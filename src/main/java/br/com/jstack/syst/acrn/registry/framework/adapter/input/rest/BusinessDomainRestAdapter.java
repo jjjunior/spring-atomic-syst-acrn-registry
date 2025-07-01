@@ -1,4 +1,6 @@
-package br.com.jstack.syst.acrn.registry.framework.adapter.input.rest.api;
+package br.com.jstack.syst.acrn.registry.framework.adapter.input.rest;
+
+import java.util.List;
 
 import br.com.jstack.syst.acrn.registry.api.BusinessDomainApi;
 import br.com.jstack.syst.acrn.registry.model.BusinessDomainRequest;
@@ -6,10 +8,8 @@ import br.com.jstack.syst.acrn.registry.model.BusinessDomainResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
-public class BusinessDomainRestApi implements BusinessDomainApi {
+public class BusinessDomainRestAdapter implements BusinessDomainApi {
 
     @Override
     public ResponseEntity<Void> createBusinessDomain(BusinessDomainRequest businessDomainRequest) {

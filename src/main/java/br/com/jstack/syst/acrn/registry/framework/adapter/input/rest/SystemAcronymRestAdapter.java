@@ -1,4 +1,6 @@
-package br.com.jstack.syst.acrn.registry.framework.adapter.input.rest.api;
+package br.com.jstack.syst.acrn.registry.framework.adapter.input.rest;
+
+import java.util.List;
 
 import br.com.jstack.syst.acrn.registry.api.SystemAcronymApi;
 import br.com.jstack.syst.acrn.registry.model.SystemAcronymRequest;
@@ -6,10 +8,8 @@ import br.com.jstack.syst.acrn.registry.model.SystemAcronymResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
-public class SystemAcronymRestApi implements SystemAcronymApi {
+public class SystemAcronymRestAdapter implements SystemAcronymApi {
     @Override
     public ResponseEntity<Void> createSystemAcronym(SystemAcronymRequest systemAcronymRequest) {
         return SystemAcronymApi.super.createSystemAcronym(systemAcronymRequest);

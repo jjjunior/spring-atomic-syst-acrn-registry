@@ -1,4 +1,6 @@
-package br.com.jstack.syst.acrn.registry.framework.adapter.input.rest.api;
+package br.com.jstack.syst.acrn.registry.framework.adapter.input.rest;
+
+import java.util.List;
 
 import br.com.jstack.syst.acrn.registry.api.TeamApi;
 import br.com.jstack.syst.acrn.registry.model.TeamRequest;
@@ -6,10 +8,8 @@ import br.com.jstack.syst.acrn.registry.model.TeamResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
-public class TeamRestApi implements TeamApi {
+public class TeamRestAdapter implements TeamApi {
     @Override
     public ResponseEntity<Void> createTeam(TeamRequest teamRequest) {
         return TeamApi.super.createTeam(teamRequest);

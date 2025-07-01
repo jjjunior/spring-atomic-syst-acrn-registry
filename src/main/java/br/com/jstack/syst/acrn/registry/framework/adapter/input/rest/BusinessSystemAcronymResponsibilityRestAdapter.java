@@ -1,4 +1,6 @@
-package br.com.jstack.syst.acrn.registry.framework.adapter.input.rest.api;
+package br.com.jstack.syst.acrn.registry.framework.adapter.input.rest;
+
+import java.util.Optional;
 
 import br.com.jstack.syst.acrn.registry.api.BusinessSystemAcronymResponsibilityApi;
 import br.com.jstack.syst.acrn.registry.model.SystemAcronymResponsibilityRequest;
@@ -7,10 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.NativeWebRequest;
 
-import java.util.Optional;
-
 @RestController
-public class BusinessSystemAcronymResponsibilityRestApi implements BusinessSystemAcronymResponsibilityApi {
+public class BusinessSystemAcronymResponsibilityRestAdapter implements BusinessSystemAcronymResponsibilityApi {
     @Override
     public Optional<NativeWebRequest> getRequest() {
         return BusinessSystemAcronymResponsibilityApi.super.getRequest();
