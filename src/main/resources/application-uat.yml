@@ -10,7 +10,7 @@ spring:
     password: postgres
     hikari:
       minimum-idle: 5
-      maximum-pool-size: 20
+      maximum-pool-size: 10
       auto-commit: true
       transaction-isolation: TRANSACTION_READ_COMMITTED
 
@@ -23,10 +23,6 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/000-master.xml
     enabled: true
-
-springdoc:
-  swagger-ui:
-    path: /swagger-ui.html
 
 server:
   port: 8080

@@ -4,7 +4,7 @@
     <parent>
         <groupId>br.com.jstack.platform</groupId>
         <artifactId>starter-atomic-spring-boot</artifactId>
-        <version>1.0.7</version>
+        <version>1.0.8-SNAPSHOT</version>
     </parent>
 
     <groupId>br.com.jstack.syst.acrn</groupId>
@@ -18,17 +18,7 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.7.7</version>
-        </dependency>
-        <dependency>
-            <groupId>net.logstash.logback</groupId>
-            <artifactId>logstash-logback-encoder</artifactId>
-            <version>7.4</version>
-        </dependency>
+        <!-- INCLUA SUA LIB AQUI SE NAO HOUVER NO PARENT -->
     </dependencies>
-
 
 </project>
