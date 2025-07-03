@@ -5,12 +5,12 @@ import java.util.stream.Collectors;
 
 import br.com.jstack.syst.acrn.registry.application.port.output.BusinessUnitOutputPort;
 import br.com.jstack.syst.acrn.registry.application.usecase.CreateUseCase;
-import br.com.jstack.syst.acrn.registry.application.usecase.DeleteUseCase;
+import br.com.jstack.syst.acrn.registry.application.usecase.DeleteByIdUseCase;
 import br.com.jstack.syst.acrn.registry.application.usecase.RetrieveAllUseCase;
 import br.com.jstack.syst.acrn.registry.application.usecase.RetrieveByIdUseCase;
 import br.com.jstack.syst.acrn.registry.application.usecase.UpdateUseCase;
-import br.com.jstack.syst.acrn.registry.domain.policy.ValidationPolicy;
 import br.com.jstack.syst.acrn.registry.domain.entity.BusinessUnit;
+import br.com.jstack.syst.acrn.registry.domain.policy.ValidationPolicy;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ public class BusinessUnitInputPort implements CreateUseCase<BusinessUnit>,
 	RetrieveByIdUseCase<BusinessUnit, Long>,
 	RetrieveAllUseCase<BusinessUnit>,
 	UpdateUseCase<BusinessUnit, Long>,
-	DeleteUseCase<Long> {
+	DeleteByIdUseCase<BusinessUnit, Long> {
 	
 	private final BusinessUnitOutputPort outputPort;
 	private final ValidationPolicy<BusinessUnit> validationPolicy;
@@ -43,12 +43,13 @@ public class BusinessUnitInputPort implements CreateUseCase<BusinessUnit>,
 	}
 	
 	@Override
-	public BusinessUnit update(Long id, BusinessUnit entity) {
+	public BusinessUnit update(Long id, @Valid BusinessUnit entity) {
+		validationPolicy.validate(entity);
 		return outputPort.update(id, entity);
 	}
 	
 	@Override
-	public void delete(Long id) {
+	public void deleteteById(Long id) {
 		outputPort.deleteById(id);
 	}
 }
