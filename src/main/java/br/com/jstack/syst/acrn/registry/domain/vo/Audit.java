@@ -17,6 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Embeddable
 public class Audit {
+	
 	@Column(name = "created_by", nullable = false, updatable = false)
 	private String createdBy;
 	
