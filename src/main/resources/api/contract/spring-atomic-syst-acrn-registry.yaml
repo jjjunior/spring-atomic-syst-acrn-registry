@@ -95,7 +95,7 @@ paths:
     get:
       tags: [ Team ]
       summary: Get team by ID
-      operationId: getTeam
+      operationId: retrieveTeam
       parameters:
         - name: id
           in: path
@@ -282,7 +282,7 @@ paths:
     get:
       tags: [ UserApp ]
       summary: Get user by ID
-      operationId: getUserApp
+      operationId: retrieveUserApp
       parameters:
         - name: id
           in: path
@@ -471,7 +471,7 @@ paths:
     get:
       tags: [ ResponsibilityType ]
       summary: Get responsibility type by ID
-      operationId: getResponsibilityType
+      operationId: retrieveResponsibilityType
       parameters:
         - name: id
           in: path
@@ -591,7 +591,7 @@ paths:
     get:
       tags: [ BusinessSystemAcronymResponsibility ]
       summary: Get system acronym responsibility by ID
-      operationId: getSystemAcronymResponsibility
+      operationId: retrieveSystemAcronymResponsibility
       parameters:
         - name: id
           in: path
@@ -742,7 +742,7 @@ paths:
     post:
       tags: [ BusinessUnit ]
       summary: Create business unit
-      operationId: create
+      operationId: createBusinessUnit
       requestBody:
         required: true
         content:
@@ -779,7 +779,7 @@ paths:
     get:
       tags: [ BusinessUnit ]
       summary: Get business unit by ID
-      operationId: getBusinessUnit
+      operationId: retrieveBusinessUnit
       parameters:
         - name: id
           in: path
@@ -965,7 +965,7 @@ paths:
     get:
       tags: [ BusinessDomain ]
       summary: Get business domain by ID
-      operationId: getBusinessDomain
+      operationId: retrieveBusinessDomain
       parameters:
         - name: id
           in: path
@@ -1160,7 +1160,7 @@ paths:
     get:
       tags: [ SystemAcronym ]
       summary: Get system acronym by ID
-      operationId: getSystemAcronym
+      operationId: retrieveSystemAcronym
       parameters:
         - name: id
           in: path
