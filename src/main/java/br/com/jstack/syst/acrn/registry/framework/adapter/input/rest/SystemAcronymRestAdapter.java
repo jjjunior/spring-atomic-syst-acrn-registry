@@ -21,14 +21,15 @@ public class SystemAcronymRestAdapter implements SystemAcronymApi {
         return SystemAcronymApi.super.deleteSystemAcronym(id);
     }
     
-    @Override
-    public ResponseEntity<SystemAcronymResponse> getSystemAcronym(Long id) {
-        return SystemAcronymApi.super.getSystemAcronym(id);
-    }
     
     @Override
     public ResponseEntity<List<SystemAcronymResponse>> listSystemAcronyms(Boolean active, Long typeId, Long domainId) {
         return SystemAcronymApi.super.listSystemAcronyms(active, typeId, domainId);
+    }
+    
+    @Override
+    public ResponseEntity<SystemAcronymResponse> retrieveSystemAcronym(Long id) {
+        return SystemAcronymApi.super.retrieveSystemAcronym(id);
     }
     
     @Override

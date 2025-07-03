@@ -22,13 +22,13 @@ public class UserAppRestAdapter implements UserAppApi {
     }
     
     @Override
-    public ResponseEntity<UserAppResponse> getUserApp(Long id) {
-        return UserAppApi.super.getUserApp(id);
+    public ResponseEntity<List<UserAppResponse>> listUserApps() {
+        return UserAppApi.super.listUserApps();
     }
     
     @Override
-    public ResponseEntity<List<UserAppResponse>> listUserApps() {
-        return UserAppApi.super.listUserApps();
+    public ResponseEntity<UserAppResponse> retrieveUserApp(Long id) {
+        return UserAppApi.super.retrieveUserApp(id);
     }
     
     @Override

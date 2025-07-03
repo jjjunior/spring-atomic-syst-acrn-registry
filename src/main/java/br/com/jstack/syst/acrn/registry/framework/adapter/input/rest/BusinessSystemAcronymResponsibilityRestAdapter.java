@@ -23,8 +23,8 @@ public class BusinessSystemAcronymResponsibilityRestAdapter implements BusinessS
     }
     
     @Override
-    public ResponseEntity<SystemAcronymResponsibilityResponse> getSystemAcronymResponsibility(Long id) {
-        return BusinessSystemAcronymResponsibilityApi.super.getSystemAcronymResponsibility(id);
+    public ResponseEntity<SystemAcronymResponsibilityResponse> retrieveSystemAcronymResponsibility(Long id) {
+        return BusinessSystemAcronymResponsibilityApi.super.retrieveSystemAcronymResponsibility(id);
     }
     
     @Override

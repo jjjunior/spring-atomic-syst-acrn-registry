@@ -22,13 +22,13 @@ public class ResponsibilityTypeRestAdapter implements ResponsibilityTypeApi {
     }
     
     @Override
-    public ResponseEntity<ResponsibilityTypeResponse> getResponsibilityType(Long id) {
-        return ResponsibilityTypeApi.super.getResponsibilityType(id);
+    public ResponseEntity<List<ResponsibilityTypeResponse>> listResponsibilityTypes() {
+        return ResponsibilityTypeApi.super.listResponsibilityTypes();
     }
     
     @Override
-    public ResponseEntity<List<ResponsibilityTypeResponse>> listResponsibilityTypes() {
-        return ResponsibilityTypeApi.super.listResponsibilityTypes();
+    public ResponseEntity<ResponsibilityTypeResponse> retrieveResponsibilityType(Long id) {
+        return ResponsibilityTypeApi.super.retrieveResponsibilityType(id);
     }
     
     @Override
