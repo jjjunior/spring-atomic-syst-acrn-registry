@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.com.jstack.syst.acrn.registry.api.BusinessUnitApi;
 import br.com.jstack.syst.acrn.registry.application.usecase.CreateUseCase;
-import br.com.jstack.syst.acrn.registry.application.usecase.DeleteUseCase;
+import br.com.jstack.syst.acrn.registry.application.usecase.DeleteByIdUseCase;
 import br.com.jstack.syst.acrn.registry.application.usecase.RetrieveAllUseCase;
 import br.com.jstack.syst.acrn.registry.application.usecase.RetrieveByIdUseCase;
 import br.com.jstack.syst.acrn.registry.application.usecase.UpdateUseCase;
@@ -26,10 +26,10 @@ public class BusinessUnitRestAdapter implements BusinessUnitApi {
     private final RetrieveByIdUseCase<BusinessUnit, Long> retrieveByIdUseCase;
     private final RetrieveAllUseCase<BusinessUnit>        retrieveAllUseCase;
     private final UpdateUseCase<BusinessUnit, Long>       updateUseCase;
-    private final DeleteUseCase<Long>                     deleteUseCase;
+    private final DeleteByIdUseCase<BusinessUnit, Long> deleteUseCase;
     
     @Override
-    public ResponseEntity<BusinessUnitResponse> create(BusinessUnitRequest request) {
+    public ResponseEntity<BusinessUnitResponse> createBusinessUnit(BusinessUnitRequest request) {
         BusinessUnit         created  = createUseCase.create(mapper.toEntity(request));
         BusinessUnitResponse response = mapper.toResponse(created);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -37,15 +37,8 @@ public class BusinessUnitRestAdapter implements BusinessUnitApi {
     
     @Override
     public ResponseEntity<Void> deleteBusinessUnit(Long id) {
-        deleteUseCase.delete(id);
+        deleteUseCase.deleteteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
-    
-    @Override
-    public ResponseEntity<BusinessUnitResponse> getBusinessUnit(Long id) {
-        BusinessUnit         retrieveById = retrieveByIdUseCase.retrieveById(id);
-        BusinessUnitResponse response     = mapper.toResponse(retrieveById);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
     
     @Override
@@ -56,8 +49,15 @@ public class BusinessUnitRestAdapter implements BusinessUnitApi {
     }
     
     @Override
-    public ResponseEntity<BusinessUnitResponse> updateBusinessUnit(Long id, BusinessUnitRequest businessUnitRequest) {
-        BusinessUnit         businessUnit = mapper.toEntity(businessUnitRequest);
+    public ResponseEntity<BusinessUnitResponse> retrieveBusinessUnit(Long id) {
+        BusinessUnit         retrieveById = retrieveByIdUseCase.retrieveById(id);
+        BusinessUnitResponse response     = mapper.toResponse(retrieveById);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+    
+    @Override
+    public ResponseEntity<BusinessUnitResponse> updateBusinessUnit(Long id, BusinessUnitRequest request) {
+        BusinessUnit businessUnit = mapper.toEntity(request);
         BusinessUnit         updated      = updateUseCase.update(id, businessUnit);
         BusinessUnitResponse response     = mapper.toResponse(updated);
         return ResponseEntity.status(HttpStatus.OK).body(response);

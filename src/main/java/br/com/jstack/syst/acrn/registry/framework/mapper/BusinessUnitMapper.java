@@ -10,6 +10,9 @@ import org.mapstruct.Mapping;
 public interface BusinessUnitMapper {
 	
 	
+	@Mapping(target = "id", ignore = true)
+	@Mapping(target = "businessDomains", ignore = true)
+	@Mapping(target = "audit", ignore = true)
 	@Mapping(target = "name", source = "name")
 	@Mapping(target = "description", source = "description")
 	@Mapping(target = "active", source = "active")

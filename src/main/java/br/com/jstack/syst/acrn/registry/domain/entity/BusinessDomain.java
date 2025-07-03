@@ -28,7 +28,6 @@ public class BusinessDomain {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "business_domain_id")
 	private Long id;
-	
 	private String  name;
 	private String  description;
 	private Boolean active;

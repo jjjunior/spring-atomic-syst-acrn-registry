@@ -22,13 +22,13 @@ public class TeamRestAdapter implements TeamApi {
     }
     
     @Override
-    public ResponseEntity<TeamResponse> getTeam(Long id) {
-        return TeamApi.super.getTeam(id);
+    public ResponseEntity<List<TeamResponse>> listTeams() {
+        return TeamApi.super.listTeams();
     }
     
     @Override
-    public ResponseEntity<List<TeamResponse>> listTeams() {
-        return TeamApi.super.listTeams();
+    public ResponseEntity<TeamResponse> retrieveTeam(Long id) {
+        return TeamApi.super.retrieveTeam(id);
     }
     
     @Override
