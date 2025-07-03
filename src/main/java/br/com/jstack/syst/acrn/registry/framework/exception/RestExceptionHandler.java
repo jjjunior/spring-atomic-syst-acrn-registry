@@ -3,7 +3,6 @@ package br.com.jstack.syst.acrn.registry.framework.exception;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 import br.com.jstack.syst.acrn.registry.model.ErrorResponse;
 import jakarta.validation.ConstraintViolation;
@@ -73,7 +72,7 @@ public class RestExceptionHandler {
 		String path = request.getDescription(false).replace("uri=", "");
 		ErrorResponse errorResponse = new ErrorResponse(
 			LocalDateTime.now(),
-			status.value(),
+			(long) status.value(),
 			error,
 			message,
 			path
