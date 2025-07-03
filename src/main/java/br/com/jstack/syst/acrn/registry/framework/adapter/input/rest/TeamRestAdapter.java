@@ -10,28 +10,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TeamRestAdapter implements TeamApi {
+    
     @Override
-    public ResponseEntity<Void> createTeam(TeamRequest teamRequest) {
+    public ResponseEntity<TeamResponse> createTeam(TeamRequest teamRequest) {
         return TeamApi.super.createTeam(teamRequest);
     }
-
+    
     @Override
-    public ResponseEntity<Void> deleteTeam(Integer id) {
+    public ResponseEntity<Void> deleteTeam(Long id) {
         return TeamApi.super.deleteTeam(id);
     }
-
+    
     @Override
-    public ResponseEntity<TeamResponse> getTeam(Integer id) {
+    public ResponseEntity<TeamResponse> getTeam(Long id) {
         return TeamApi.super.getTeam(id);
     }
-
+    
     @Override
     public ResponseEntity<List<TeamResponse>> listTeams() {
         return TeamApi.super.listTeams();
     }
-
+    
     @Override
-    public ResponseEntity<Void> updateTeam(Integer id, TeamRequest teamRequest) {
+    public ResponseEntity<TeamResponse> updateTeam(Long id, TeamRequest teamRequest) {
         return TeamApi.super.updateTeam(id, teamRequest);
     }
 }

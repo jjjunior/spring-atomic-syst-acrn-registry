@@ -1,44 +1,38 @@
 package br.com.jstack.syst.acrn.registry.framework.adapter.input.rest;
 
 import java.util.List;
-import java.util.Optional;
 
 import br.com.jstack.syst.acrn.registry.api.ResponsibilityTypeApi;
 import br.com.jstack.syst.acrn.registry.model.ResponsibilityTypeRequest;
 import br.com.jstack.syst.acrn.registry.model.ResponsibilityTypeResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.NativeWebRequest;
 
 @RestController
 public class ResponsibilityTypeRestAdapter implements ResponsibilityTypeApi {
+    
     @Override
-    public Optional<NativeWebRequest> getRequest() {
-        return ResponsibilityTypeApi.super.getRequest();
-    }
-
-    @Override
-    public ResponseEntity<Void> createResponsibilityType(ResponsibilityTypeRequest responsibilityTypeRequest) {
+    public ResponseEntity<ResponsibilityTypeResponse> createResponsibilityType(ResponsibilityTypeRequest responsibilityTypeRequest) {
         return ResponsibilityTypeApi.super.createResponsibilityType(responsibilityTypeRequest);
     }
-
+    
     @Override
-    public ResponseEntity<Void> deleteResponsibilityType(Integer id) {
+    public ResponseEntity<Void> deleteResponsibilityType(Long id) {
         return ResponsibilityTypeApi.super.deleteResponsibilityType(id);
     }
-
+    
     @Override
-    public ResponseEntity<ResponsibilityTypeResponse> getResponsibilityType(Integer id) {
+    public ResponseEntity<ResponsibilityTypeResponse> getResponsibilityType(Long id) {
         return ResponsibilityTypeApi.super.getResponsibilityType(id);
     }
-
+    
     @Override
     public ResponseEntity<List<ResponsibilityTypeResponse>> listResponsibilityTypes() {
         return ResponsibilityTypeApi.super.listResponsibilityTypes();
     }
-
+    
     @Override
-    public ResponseEntity<Void> updateResponsibilityType(Integer id, ResponsibilityTypeRequest responsibilityTypeRequest) {
+    public ResponseEntity<ResponsibilityTypeResponse> updateResponsibilityType(Long id, ResponsibilityTypeRequest responsibilityTypeRequest) {
         return ResponsibilityTypeApi.super.updateResponsibilityType(id, responsibilityTypeRequest);
     }
 }

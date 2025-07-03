@@ -10,28 +10,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class SystemAcronymRestAdapter implements SystemAcronymApi {
+    
     @Override
-    public ResponseEntity<Void> createSystemAcronym(SystemAcronymRequest systemAcronymRequest) {
+    public ResponseEntity<SystemAcronymResponse> createSystemAcronym(SystemAcronymRequest systemAcronymRequest) {
         return SystemAcronymApi.super.createSystemAcronym(systemAcronymRequest);
     }
-
+    
     @Override
-    public ResponseEntity<Void> deleteSystemAcronym(Integer id) {
+    public ResponseEntity<Void> deleteSystemAcronym(Long id) {
         return SystemAcronymApi.super.deleteSystemAcronym(id);
     }
-
+    
     @Override
-    public ResponseEntity<SystemAcronymResponse> getSystemAcronym(Integer id) {
+    public ResponseEntity<SystemAcronymResponse> getSystemAcronym(Long id) {
         return SystemAcronymApi.super.getSystemAcronym(id);
     }
-
+    
     @Override
-    public ResponseEntity<List<SystemAcronymResponse>> listSystemAcronyms(Boolean active, Integer typeId, Integer domainId) {
+    public ResponseEntity<List<SystemAcronymResponse>> listSystemAcronyms(Boolean active, Long typeId, Long domainId) {
         return SystemAcronymApi.super.listSystemAcronyms(active, typeId, domainId);
     }
-
+    
     @Override
-    public ResponseEntity<Void> updateSystemAcronym(Integer id, SystemAcronymRequest systemAcronymRequest) {
+    public ResponseEntity<SystemAcronymResponse> updateSystemAcronym(Long id, SystemAcronymRequest systemAcronymRequest) {
         return SystemAcronymApi.super.updateSystemAcronym(id, systemAcronymRequest);
     }
 }

@@ -1,50 +1,54 @@
 package br.com.jstack.syst.acrn.registry.application.port.input;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import br.com.jstack.syst.acrn.registry.application.mapper.BusinessUnitMapper;
 import br.com.jstack.syst.acrn.registry.application.port.output.BusinessUnitOutputPort;
-import br.com.jstack.syst.acrn.registry.application.usecase.BusinessUnitUseCase;
+import br.com.jstack.syst.acrn.registry.application.usecase.CreateUseCase;
+import br.com.jstack.syst.acrn.registry.application.usecase.DeleteUseCase;
+import br.com.jstack.syst.acrn.registry.application.usecase.RetrieveAllUseCase;
+import br.com.jstack.syst.acrn.registry.application.usecase.RetrieveByIdUseCase;
+import br.com.jstack.syst.acrn.registry.application.usecase.UpdateUseCase;
+import br.com.jstack.syst.acrn.registry.domain.policy.ValidationPolicy;
 import br.com.jstack.syst.acrn.registry.domain.entity.BusinessUnit;
-import br.com.jstack.syst.acrn.registry.framework.adapter.input.rest.inbound.BusinessUnitInbound;
-import br.com.jstack.syst.acrn.registry.framework.adapter.output.persistence.mapper.BusinessUnitOutboundMapper;
-import br.com.jstack.syst.acrn.registry.framework.adapter.output.persistence.outbound.BusinessUnitOutbound;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class BusinessUnitInputPort implements BusinessUnitUseCase {
+public class BusinessUnitInputPort implements CreateUseCase<BusinessUnit>,
+	RetrieveByIdUseCase<BusinessUnit, Long>,
+	RetrieveAllUseCase<BusinessUnit>,
+	UpdateUseCase<BusinessUnit, Long>,
+	DeleteUseCase<Long> {
 	
-	private final BusinessUnitOutputPort     businessUnitOutputPort;
-	private final BusinessUnitMapper         businessUnitMapper;
-	private final BusinessUnitOutboundMapper businessUnitOutboundMapper;
+	private final BusinessUnitOutputPort outputPort;
+	private final ValidationPolicy<BusinessUnit> validationPolicy;
 	
 	@Override
-	public void createBusinessUnit(BusinessUnitInbound businessUnitInbound) {
-		BusinessUnit businessUnit = businessUnitMapper.toEntity(businessUnitInbound);
-		businessUnitOutputPort.persistBusinessUnit(businessUnit);
+	public BusinessUnit create(@Valid BusinessUnit entity) {
+		validationPolicy.validate(entity);
+		return outputPort.save(entity);
 	}
 	
 	@Override
-	public void removeBusinessUnit(Long id) {
-		businessUnitOutputPort.removeBusinessUnit(id);
+	public BusinessUnit retrieveById(Long id) {
+		return outputPort.findById(id).get();
 	}
 	
 	@Override
-	public BusinessUnitOutbound retrieveBusinessUnit(Long id) {
-		BusinessUnit businessUnit = businessUnitOutputPort.retrieveBusinessUnit(id);
-		return businessUnitOutboundMapper.toOutbound(businessUnit);
+	public List<BusinessUnit> retrieveAll() {
+		return outputPort.findAll().stream().collect(Collectors.toList());
 	}
 	
 	@Override
-	public List<BusinessUnitOutbound> retrieveBusinessUnits() {
-		List<BusinessUnit> businessUnits = businessUnitOutputPort.listBusinessUnits();
-		return businessUnitOutboundMapper.toListOutbound(businessUnits);
+	public BusinessUnit update(Long id, BusinessUnit entity) {
+		return outputPort.update(id, entity);
 	}
 	
 	@Override
-	public void changeBusinessUnit(Long id, BusinessUnitInbound businessUnitInbound) {
-		businessUnitOutputPort.changeBusinessUnit(id, businessUnitMapper.toEntity(businessUnitInbound));
+	public void delete(Long id) {
+		outputPort.deleteById(id);
 	}
 }

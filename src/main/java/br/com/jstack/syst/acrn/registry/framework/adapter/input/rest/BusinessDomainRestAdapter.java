@@ -10,29 +10,30 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class BusinessDomainRestAdapter implements BusinessDomainApi {
-
+    
+    
     @Override
-    public ResponseEntity<Void> createBusinessDomain(BusinessDomainRequest businessDomainRequest) {
+    public ResponseEntity<BusinessDomainResponse> createBusinessDomain(BusinessDomainRequest businessDomainRequest) {
         return BusinessDomainApi.super.createBusinessDomain(businessDomainRequest);
     }
-
+    
     @Override
-    public ResponseEntity<Void> deleteBusinessDomain(Integer id) {
+    public ResponseEntity<Void> deleteBusinessDomain(Long id) {
         return BusinessDomainApi.super.deleteBusinessDomain(id);
     }
-
+    
     @Override
-    public ResponseEntity<BusinessDomainResponse> getBusinessDomain(Integer id) {
+    public ResponseEntity<BusinessDomainResponse> getBusinessDomain(Long id) {
         return BusinessDomainApi.super.getBusinessDomain(id);
     }
-
+    
     @Override
     public ResponseEntity<List<BusinessDomainResponse>> listBusinessDomains() {
         return BusinessDomainApi.super.listBusinessDomains();
     }
-
+    
     @Override
-    public ResponseEntity<Void> updateBusinessDomain(Integer id, BusinessDomainRequest businessDomainRequest) {
+    public ResponseEntity<BusinessDomainResponse> updateBusinessDomain(Long id, BusinessDomainRequest businessDomainRequest) {
         return BusinessDomainApi.super.updateBusinessDomain(id, businessDomainRequest);
     }
 }

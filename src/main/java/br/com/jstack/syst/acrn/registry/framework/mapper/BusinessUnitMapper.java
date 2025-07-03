@@ -1,14 +1,19 @@
-package br.com.jstack.syst.acrn.registry.framework.adapter.output.persistence.mapper;
-
-import java.util.List;
+package br.com.jstack.syst.acrn.registry.framework.mapper;
 
 import br.com.jstack.syst.acrn.registry.domain.entity.BusinessUnit;
-import br.com.jstack.syst.acrn.registry.framework.adapter.output.persistence.outbound.BusinessUnitOutbound;
+import br.com.jstack.syst.acrn.registry.model.BusinessUnitRequest;
+import br.com.jstack.syst.acrn.registry.model.BusinessUnitResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface BusinessUnitOutboundMapper {
+public interface BusinessUnitMapper {
+	
+	
+	@Mapping(target = "name", source = "name")
+	@Mapping(target = "description", source = "description")
+	@Mapping(target = "active", source = "active")
+	BusinessUnit toEntity(BusinessUnitRequest request);
 	
 	@Mapping(target = "id", source = "id")
 	@Mapping(target = "name", source = "name")
@@ -18,7 +23,6 @@ public interface BusinessUnitOutboundMapper {
 	@Mapping(target = "createdAt", source = "audit.createdAt")
 	@Mapping(target = "updatedBy", source = "audit.updatedBy")
 	@Mapping(target = "updatedAt", source = "audit.updatedAt")
-	BusinessUnitOutbound toOutbound(BusinessUnit businessUnit);
+	BusinessUnitResponse toResponse(BusinessUnit domain);
 	
-	List<BusinessUnitOutbound> toListOutbound(List<BusinessUnit> businessUnitList);
 }

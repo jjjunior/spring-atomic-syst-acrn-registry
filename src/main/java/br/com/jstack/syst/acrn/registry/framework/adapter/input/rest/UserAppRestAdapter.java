@@ -10,28 +10,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserAppRestAdapter implements UserAppApi {
+    
     @Override
-    public ResponseEntity<Void> createUserApp(UserAppRequest userAppRequest) {
+    public ResponseEntity<UserAppResponse> createUserApp(UserAppRequest userAppRequest) {
         return UserAppApi.super.createUserApp(userAppRequest);
     }
-
+    
     @Override
-    public ResponseEntity<Void> deleteUserApp(Integer id) {
+    public ResponseEntity<Void> deleteUserApp(Long id) {
         return UserAppApi.super.deleteUserApp(id);
     }
-
+    
     @Override
-    public ResponseEntity<UserAppResponse> getUserApp(Integer id) {
+    public ResponseEntity<UserAppResponse> getUserApp(Long id) {
         return UserAppApi.super.getUserApp(id);
     }
-
+    
     @Override
     public ResponseEntity<List<UserAppResponse>> listUserApps() {
         return UserAppApi.super.listUserApps();
     }
-
+    
     @Override
-    public ResponseEntity<Void> updateUserApp(Integer id, UserAppRequest userAppRequest) {
+    public ResponseEntity<UserAppResponse> updateUserApp(Long id, UserAppRequest userAppRequest) {
         return UserAppApi.super.updateUserApp(id, userAppRequest);
     }
 }

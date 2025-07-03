@@ -3,11 +3,13 @@ package br.com.jstack.syst.acrn.registry.framework.adapter.input.rest;
 import java.util.List;
 
 import br.com.jstack.syst.acrn.registry.api.BusinessUnitApi;
-import br.com.jstack.syst.acrn.registry.application.usecase.BusinessUnitUseCase;
-import br.com.jstack.syst.acrn.registry.framework.adapter.input.rest.inbound.BusinessUnitInbound;
-import br.com.jstack.syst.acrn.registry.framework.adapter.input.rest.mapper.BusinessUnitInboundMapper;
-import br.com.jstack.syst.acrn.registry.framework.adapter.input.rest.mapper.BusinessUnitResponseMapper;
-import br.com.jstack.syst.acrn.registry.framework.adapter.output.persistence.outbound.BusinessUnitOutbound;
+import br.com.jstack.syst.acrn.registry.application.usecase.CreateUseCase;
+import br.com.jstack.syst.acrn.registry.application.usecase.DeleteUseCase;
+import br.com.jstack.syst.acrn.registry.application.usecase.RetrieveAllUseCase;
+import br.com.jstack.syst.acrn.registry.application.usecase.RetrieveByIdUseCase;
+import br.com.jstack.syst.acrn.registry.application.usecase.UpdateUseCase;
+import br.com.jstack.syst.acrn.registry.domain.entity.BusinessUnit;
+import br.com.jstack.syst.acrn.registry.framework.mapper.BusinessUnitMapper;
 import br.com.jstack.syst.acrn.registry.model.BusinessUnitRequest;
 import br.com.jstack.syst.acrn.registry.model.BusinessUnitResponse;
 import lombok.RequiredArgsConstructor;
@@ -19,41 +21,45 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BusinessUnitRestAdapter implements BusinessUnitApi {
     
-    private final BusinessUnitInboundMapper  businessUnitInboundMapper;
-    private final BusinessUnitResponseMapper businessUnitResponseMapper;
-    private final BusinessUnitUseCase        businessUnitUseCase;
+    private final BusinessUnitMapper                      mapper;
+    private final CreateUseCase<BusinessUnit>             createUseCase;
+    private final RetrieveByIdUseCase<BusinessUnit, Long> retrieveByIdUseCase;
+    private final RetrieveAllUseCase<BusinessUnit>        retrieveAllUseCase;
+    private final UpdateUseCase<BusinessUnit, Long>       updateUseCase;
+    private final DeleteUseCase<Long>                     deleteUseCase;
     
     @Override
-    public ResponseEntity<Void> createBusinessUnit(BusinessUnitRequest businessUnitRequest) {
-        BusinessUnitInbound businessUnitInbound = businessUnitInboundMapper.toInbound(businessUnitRequest);
-        businessUnitUseCase.createBusinessUnit(businessUnitInbound);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<BusinessUnitResponse> create(BusinessUnitRequest request) {
+        BusinessUnit         created  = createUseCase.create(mapper.toEntity(request));
+        BusinessUnitResponse response = mapper.toResponse(created);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
-
+    
     @Override
-    public ResponseEntity<Void> deleteBusinessUnit(Integer id) {
-        businessUnitUseCase.removeBusinessUnit(id.longValue());
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Void> deleteBusinessUnit(Long id) {
+        deleteUseCase.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-
+    
     @Override
-    public ResponseEntity<BusinessUnitResponse> getBusinessUnit(Integer id) {
-        BusinessUnitOutbound businessUnitOutbound = businessUnitUseCase.retrieveBusinessUnit(id.longValue());
-        BusinessUnitResponse businessUnitResponse = businessUnitResponseMapper.toResponse(businessUnitOutbound);
-        return new ResponseEntity<>(businessUnitResponse, HttpStatus.OK);
+    public ResponseEntity<BusinessUnitResponse> getBusinessUnit(Long id) {
+        BusinessUnit         retrieveById = retrieveByIdUseCase.retrieveById(id);
+        BusinessUnitResponse response     = mapper.toResponse(retrieveById);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-
+    
     @Override
     public ResponseEntity<List<BusinessUnitResponse>> listBusinessUnits() {
-        List<BusinessUnitOutbound> businessUnitOutbounds = businessUnitUseCase.retrieveBusinessUnits();
-        List<BusinessUnitResponse> businessUnitsResponse = businessUnitResponseMapper.toResponse(businessUnitOutbounds);
-        return new ResponseEntity<>(businessUnitsResponse, HttpStatus.OK);
+        List<BusinessUnit>         businessUnits = retrieveAllUseCase.retrieveAll();
+        List<BusinessUnitResponse> responses     = businessUnits.stream().map(mapper::toResponse).toList();
+        return ResponseEntity.status(HttpStatus.OK).body(responses);
     }
-
+    
     @Override
-    public ResponseEntity<Void> updateBusinessUnit(Integer id, BusinessUnitRequest businessUnitRequest) {
-        BusinessUnitInbound businessUnitInbound = businessUnitInboundMapper.toInbound(businessUnitRequest);
-        businessUnitUseCase.changeBusinessUnit(id.longValue(), businessUnitInbound);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<BusinessUnitResponse> updateBusinessUnit(Long id, BusinessUnitRequest businessUnitRequest) {
+        BusinessUnit         businessUnit = mapper.toEntity(businessUnitRequest);
+        BusinessUnit         updated      = updateUseCase.update(id, businessUnit);
+        BusinessUnitResponse response     = mapper.toResponse(updated);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

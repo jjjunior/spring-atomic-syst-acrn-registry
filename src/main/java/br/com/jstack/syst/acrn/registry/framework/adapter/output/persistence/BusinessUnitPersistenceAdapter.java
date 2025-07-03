@@ -2,6 +2,7 @@ package br.com.jstack.syst.acrn.registry.framework.adapter.output.persistence;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import br.com.jstack.syst.acrn.registry.application.port.output.BusinessUnitOutputPort;
 import br.com.jstack.syst.acrn.registry.domain.entity.BusinessUnit;
@@ -9,52 +10,53 @@ import br.com.jstack.syst.acrn.registry.framework.adapter.output.persistence.rep
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
-@Repository
+@Component
 public class BusinessUnitPersistenceAdapter implements BusinessUnitOutputPort {
 	
 	private final EntityManager          entityManager;
-	private final BusinessUnitRepository businessUnitRepository;
+	private final BusinessUnitRepository repository;
+	
+	@Override
+	public boolean existsByName(String name) {
+		return repository.findByName(name).isPresent();
+	}
 	
 	@Transactional
 	@Override
-	public void persistBusinessUnit(BusinessUnit businessUnit) {
-		businessUnitRepository.saveAndFlush(businessUnit);
+	public BusinessUnit save(BusinessUnit domain) {
+		BusinessUnit businessUnit = repository.saveAndFlush(domain);
 		entityManager.clear();
+		return businessUnit;
+	}
+	
+	@Override
+	public Optional<BusinessUnit> findById(Long aLong) {
+		return repository.findById(aLong);
+	}
+	
+	@Override
+	public List<BusinessUnit> findAll() {
+		return repository.findAll();
 	}
 	
 	@Transactional
 	@Override
-	public void removeBusinessUnit(Long id) {
-		if (!businessUnitRepository.existsById(id)) {
-			throw new NoSuchElementException("Cannot delete: Business Unit not found with id: " + id);
-		}
-		businessUnitRepository.deleteById(id);
-	}
-	
-	@Override
-	public BusinessUnit retrieveBusinessUnit(Long id) {
-		return businessUnitRepository.findById(id)
-			.orElseThrow(() -> new NoSuchElementException("Business Unit not found with id: " + id));
-	}
-	
-	@Override
-	public List<BusinessUnit> listBusinessUnits() {
-		return businessUnitRepository.findAll();
+	public void deleteById(Long aLong) {
+		repository.deleteById(aLong);
 	}
 	
 	@Transactional
 	@Override
-	public void changeBusinessUnit(Long id, BusinessUnit updatedBusinessUnit) {
-		BusinessUnit existing = businessUnitRepository.findById(id)
+	public BusinessUnit update(Long id, BusinessUnit domain) {
+		BusinessUnit existing = repository.findById(id)
 			.orElseThrow(() -> new NoSuchElementException("Business Unit not found with id: " + id));
-		
-		existing.setName(updatedBusinessUnit.getName());
-		existing.setDescription(updatedBusinessUnit.getDescription());
-		existing.setActive(updatedBusinessUnit.getActive());
-		businessUnitRepository.saveAndFlush(existing);
-		entityManager.clear();
+		existing.setName(domain.getName());
+		existing.setDescription(domain.getDescription());
+		existing.setActive(domain.getActive());
+		repository.saveAndFlush(existing);
+		return existing;
 	}
 }
