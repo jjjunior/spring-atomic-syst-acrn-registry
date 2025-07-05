@@ -69,22 +69,6 @@
         </insert>
     </changeSet>
 
-    <!-- User App -->
-    <changeSet id="load-05" author="jota">
-        <insert tableName="user_app">
-            <column name="user_app_id" valueNumeric="1"/>
-            <column name="name" value="João Silva"/>
-            <column name="email" value="joao.silva@empresa.com"/>
-            <column name="team_id" valueNumeric="1"/>
-        </insert>
-        <insert tableName="user_app">
-            <column name="user_app_id" valueNumeric="2"/>
-            <column name="name" value="Maria Souza"/>
-            <column name="email" value="maria.souza@empresa.com"/>
-            <column name="team_id" valueNumeric="2"/>
-        </insert>
-    </changeSet>
-
     <!-- Responsibility Type -->
     <changeSet id="load-06" author="jota">
         <insert tableName="responsibility_type">
@@ -109,7 +93,6 @@
             <column name="name" value="Hub de Mensagens"/>
             <column name="domain_id" valueNumeric="1"/>
             <column name="type_id" valueNumeric="1"/>
-            <column name="owner_user_id" valueNumeric="1"/>
             <column name="dev_team_id" valueNumeric="1"/>
             <column name="biz_team_id" valueNumeric="2"/>
             <column name="product_owner_name" value="João Maranhão"/>
@@ -132,7 +115,6 @@
             <column name="acronym_id" valueNumeric="1"/>
             <column name="responsibility_id" valueNumeric="1"/>
             <column name="team_id" valueNumeric="1"/>
-            <column name="user_app_id" valueNumeric="1"/>
             <column name="active" valueBoolean="true"/>
         </insert>
         <insert tableName="system_acronym_responsibility">
@@ -140,7 +122,6 @@
             <column name="acronym_id" valueNumeric="1"/>
             <column name="responsibility_id" valueNumeric="2"/>
             <column name="team_id" valueNumeric="2"/>
-            <column name="user_app_id" valueNumeric="2"/>
             <column name="active" valueBoolean="true"/>
         </insert>
     </changeSet>
