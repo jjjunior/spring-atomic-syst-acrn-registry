@@ -16,7 +16,7 @@ public interface BusinessUnitMapper {
 	@Mapping(target = "name", source = "name")
 	@Mapping(target = "description", source = "description")
 	@Mapping(target = "active", source = "active")
-	BusinessUnit toEntity(BusinessUnitRequest request);
+	BusinessUnit toDomain(BusinessUnitRequest request);
 	
 	@Mapping(target = "id", source = "id")
 	@Mapping(target = "name", source = "name")

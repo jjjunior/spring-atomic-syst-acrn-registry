@@ -10,7 +10,7 @@ import br.com.jstack.syst.acrn.registry.application.usecase.RetrieveAllUseCase;
 import br.com.jstack.syst.acrn.registry.application.usecase.RetrieveByIdUseCase;
 import br.com.jstack.syst.acrn.registry.application.usecase.UpdateUseCase;
 import br.com.jstack.syst.acrn.registry.domain.entity.BusinessUnit;
-import br.com.jstack.syst.acrn.registry.domain.policy.OperationType;
+import br.com.jstack.syst.acrn.registry.domain.vo.OperationType;
 import br.com.jstack.syst.acrn.registry.domain.policy.PolicyResolver;
 import br.com.jstack.syst.acrn.registry.domain.policy.ValidationPolicy;
 import jakarta.validation.Valid;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 public class BusinessUnitInputPort implements CreateUseCase<BusinessUnit>,
 	RetrieveByIdUseCase<BusinessUnit, Long>,
 	RetrieveAllUseCase<BusinessUnit>,
-	UpdateUseCase<BusinessUnit,Long>,
+	UpdateUseCase<BusinessUnit, Long>,
 	DeleteByIdUseCase<BusinessUnit, Long> {
 	
 	private final BusinessUnitOutputPort       outputPort;
@@ -30,7 +30,7 @@ public class BusinessUnitInputPort implements CreateUseCase<BusinessUnit>,
 	
 	@Override
 	public BusinessUnit create(@Valid BusinessUnit domain) {
-		ValidationPolicy<BusinessUnit> policy = policyResolver.resolve(OperationType.CREATE);
+		ValidationPolicy<BusinessUnit> policy = policyResolver.resolve(OperationType.CREATE, BusinessUnit.class);
 		policy.validate(domain);
 		return outputPort.save(domain);
 	}
@@ -47,7 +47,7 @@ public class BusinessUnitInputPort implements CreateUseCase<BusinessUnit>,
 	
 	@Override
 	public BusinessUnit update(@Valid BusinessUnit domain) {
-		ValidationPolicy<BusinessUnit> policy = policyResolver.resolve(OperationType.UPDATE);
+		ValidationPolicy<BusinessUnit> policy = policyResolver.resolve(OperationType.UPDATE, BusinessUnit.class);
 		policy.validate(domain);
 		return outputPort.update(domain);
 	}
