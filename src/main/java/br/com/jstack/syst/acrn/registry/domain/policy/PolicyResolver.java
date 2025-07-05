@@ -2,6 +2,7 @@ package br.com.jstack.syst.acrn.registry.domain.policy;
 
 import java.util.List;
 
+import br.com.jstack.syst.acrn.registry.domain.vo.OperationType;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,10 +14,11 @@ public class PolicyResolver<T> {
 		this.policies = policies;
 	}
 	
-	public ValidationPolicy<T> resolve(OperationType operation) {
-		return policies.stream()
-			.filter(policy -> policy.supports(operation))
+	public <T> ValidationPolicy<T> resolve(OperationType operation, Class<T> clazz) {
+		return (ValidationPolicy<T>) policies.stream()
+			.filter(p -> p.supports(operation))
+			.filter(p -> p.getTargetType().equals(clazz))
 			.findFirst()
-			.orElseThrow(() -> new IllegalStateException("No policy found for operation: " + operation));
+			.orElseThrow(() -> new IllegalStateException("No policy found for operation: " + operation + " and type: " + clazz.getSimpleName()));
 	}
 }

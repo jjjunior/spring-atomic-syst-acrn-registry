@@ -1,4 +1,4 @@
-package br.com.jstack.syst.acrn.registry.application.usecase;
+package br.com.jstack.syst.acrn.registry.application.port.output;
 
 import java.util.List;
 
