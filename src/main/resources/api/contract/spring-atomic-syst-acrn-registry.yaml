@@ -3,29 +3,26 @@ info:
   title: System Acronym Registry
   version: v1
 servers:
-  - url: https://system-acronym-registry.appdes.bvnet.bv
+  - url: https://system-acronym-registry.des.jstack.com.br
     description: DES
-  - url: https://system-acronym-registry.appuat.bvnet.bv
+  - url: https://system-acronym-registry.uat.jstack.com.br
     description: UAT
-  - url: https://system-acronym-registry.app.bvnet.bv
+  - url: https://system-acronym-registry.jstack.br.com.br
     description: PRD
-
 security:
   - bearerAuth: [ ]
-
 tags:
   - name: BusinessDomain
   - name: Team
-  - name: UserApp
   - name: ResponsibilityType
   - name: BusinessUnit
   - name: BusinessSystemAcronymResponsibility
   - name: SystemAcronym
-
 paths:
   /v1/teams:
     get:
-      tags: [ Team ]
+      tags:
+        - Team
       summary: List teams
       operationId: listTeams
       responses:
@@ -55,9 +52,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
     post:
-      tags: [ Team ]
+      tags:
+        - Team
       summary: Create a team
       operationId: createTeam
       requestBody:
@@ -93,7 +90,8 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
   /v1/teams/{id}:
     get:
-      tags: [ Team ]
+      tags:
+        - Team
       summary: Get team by ID
       operationId: retrieveTeam
       parameters:
@@ -128,9 +126,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
     put:
-      tags: [ Team ]
+      tags:
+        - Team
       summary: Update team
       operationId: updateTeam
       parameters:
@@ -178,7 +176,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
     delete:
-      tags: [ Team ]
+      tags:
+        - Team
       summary: Delete team
       operationId: deleteTeam
       parameters:
@@ -209,198 +208,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
-  /v1/user-apps:
-    get:
-      tags: [ UserApp ]
-      summary: List users
-      operationId: listUserApps
-      responses:
-        '200':
-          description: List of users
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/UserAppResponse'
-        404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-    post:
-      tags: [ UserApp ]
-      summary: Create user
-      operationId: createUserApp
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserAppRequest'
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserAppResponse'
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-
-  /v1/user-apps/{id}:
-    get:
-      tags: [ UserApp ]
-      summary: Get user by ID
-      operationId: retrieveUserApp
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '200':
-          description: User details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserAppResponse'
-        404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-
-    put:
-      tags: [ UserApp ]
-      summary: Update user
-      operationId: updateUserApp
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserAppRequest'
-      responses:
-        '200':
-          description: Updated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserAppResponse'
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-
-    delete:
-      tags: [ UserApp ]
-      summary: Delete user
-      operationId: deleteUserApp
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '204':
-          description: Deleted
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-
   /v1/responsibility-types:
     get:
-      tags: [ ResponsibilityType ]
+      tags:
+        - ResponsibilityType
       summary: List responsibility types
       operationId: listResponsibilityTypes
       responses:
@@ -430,9 +241,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
     post:
-      tags: [ ResponsibilityType ]
+      tags:
+        - ResponsibilityType
       summary: Create responsibility type
       operationId: createResponsibilityType
       requestBody:
@@ -466,10 +277,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
   /v1/responsibility-types/{id}:
     get:
-      tags: [ ResponsibilityType ]
+      tags:
+        - ResponsibilityType
       summary: Get responsibility type by ID
       operationId: retrieveResponsibilityType
       parameters:
@@ -504,9 +315,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
     put:
-      tags: [ ResponsibilityType ]
+      tags:
+        - ResponsibilityType
       summary: Update responsibility type
       operationId: updateResponsibilityType
       parameters:
@@ -553,9 +364,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
     delete:
-      tags: [ ResponsibilityType ]
+      tags:
+        - ResponsibilityType
       summary: Delete responsibility type
       operationId: deleteResponsibilityType
       parameters:
@@ -586,10 +397,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
   /v1/system-acronym-responsibilities/{id}:
     get:
-      tags: [ BusinessSystemAcronymResponsibility ]
+      tags:
+        - BusinessSystemAcronymResponsibility
       summary: Get system acronym responsibility by ID
       operationId: retrieveSystemAcronymResponsibility
       parameters:
@@ -624,9 +435,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
     put:
-      tags: [ BusinessSystemAcronymResponsibility ]
+      tags:
+        - BusinessSystemAcronymResponsibility
       summary: Update system acronym responsibility
       operationId: updateSystemAcronymResponsibility
       parameters:
@@ -673,10 +484,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
-
     delete:
-      tags: [ BusinessSystemAcronymResponsibility ]
+      tags:
+        - BusinessSystemAcronymResponsibility
       summary: Delete system acronym responsibility
       operationId: deleteSystemAcronymResponsibility
       parameters:
@@ -709,7 +519,8 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
   /v1/business-units:
     get:
-      tags: [ BusinessUnit ]
+      tags:
+        - BusinessUnit
       summary: List business units
       operationId: listBusinessUnits
       responses:
@@ -740,7 +551,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
     post:
-      tags: [ BusinessUnit ]
+      tags:
+        - BusinessUnit
       summary: Create business unit
       operationId: createBusinessUnit
       requestBody:
@@ -774,10 +586,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
   /v1/business-units/{id}:
     get:
-      tags: [ BusinessUnit ]
+      tags:
+        - BusinessUnit
       summary: Get business unit by ID
       operationId: retrieveBusinessUnit
       parameters:
@@ -813,7 +625,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
     put:
-      tags: [ BusinessUnit ]
+      tags:
+        - BusinessUnit
       summary: Update business unit
       operationId: updateBusinessUnit
       parameters:
@@ -861,7 +674,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
     delete:
-      tags: [ BusinessUnit ]
+      tags:
+        - BusinessUnit
       summary: Delete business unit
       operationId: deleteBusinessUnit
       parameters:
@@ -892,10 +706,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
   /v1/business-domains:
     get:
-      tags: [ BusinessDomain ]
+      tags:
+        - BusinessDomain
       summary: List business domains
       operationId: listBusinessDomains
       responses:
@@ -926,7 +740,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
     post:
-      tags: [ BusinessDomain ]
+      tags:
+        - BusinessDomain
       summary: Create business domain
       operationId: createBusinessDomain
       requestBody:
@@ -960,10 +775,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
   /v1/business-domains/{id}:
     get:
-      tags: [ BusinessDomain ]
+      tags:
+        - BusinessDomain
       summary: Get business domain by ID
       operationId: retrieveBusinessDomain
       parameters:
@@ -999,7 +814,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
     put:
-      tags: [ BusinessDomain ]
+      tags:
+        - BusinessDomain
       summary: Update business domain
       operationId: updateBusinessDomain
       parameters:
@@ -1047,7 +863,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
     delete:
-      tags: [ BusinessDomain ]
+      tags:
+        - BusinessDomain
       summary: Delete business domain
       operationId: deleteBusinessDomain
       parameters:
@@ -1078,10 +895,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
   /v1/system-acronyms:
     get:
-      tags: [ SystemAcronym ]
+      tags:
+        - SystemAcronym
       summary: List System Acronyms
       operationId: listSystemAcronyms
       parameters:
@@ -1121,7 +938,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
     post:
-      tags: [ SystemAcronym ]
+      tags:
+        - SystemAcronym
       summary: Create a system acronym
       operationId: createSystemAcronym
       requestBody:
@@ -1155,10 +973,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
   /v1/system-acronyms/{id}:
     get:
-      tags: [ SystemAcronym ]
+      tags:
+        - SystemAcronym
       summary: Get system acronym by ID
       operationId: retrieveSystemAcronym
       parameters:
@@ -1193,9 +1011,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
     put:
-      tags: [ SystemAcronym ]
+      tags:
+        - SystemAcronym
       summary: Update system acronym
       operationId: updateSystemAcronym
       parameters:
@@ -1242,9 +1060,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
     delete:
-      tags: [ SystemAcronym ]
+      tags:
+        - SystemAcronym
       summary: Soft delete a system acronym
       operationId: deleteSystemAcronym
       parameters:
@@ -1302,9 +1120,6 @@ components:
         typeId:
           type: integer
           format: int64
-        owner_user_id:
-          type: integer
-          format: int64
         dev_team_id:
           type: integer
           format: int64
@@ -1337,7 +1152,6 @@ components:
           type: boolean
         createdBy:
           type: string
-
     SystemAcronymResponse:
       allOf:
         - $ref: '#/components/schemas/SystemAcronymRequest'
@@ -1354,10 +1168,10 @@ components:
             updated_at:
               type: string
               format: date-time
-
     TeamRequest:
       type: object
-      required: [name]
+      required:
+        - name
       properties:
         name:
           type: string
@@ -1381,50 +1195,10 @@ components:
               format: date-time
             updatedBy:
               type: string
-    UserAppRequest:
-      type: object
-      required: [name, email, teamId]
-      properties:
-        name:
-          type: string
-        email:
-          type: string
-          format: email
-        teamId:
-          type: integer
-          format: int64
-        companyId:
-          type: integer
-          format: int64
-        tenantId:
-          type: integer
-          format: int64
-        ssoLoginId:
-          type: string
-        uuid:
-          type: string
-          format: uuid
-    UserAppResponse:
-      allOf:
-        - $ref: '#/components/schemas/UserAppRequest'
-        - type: object
-          properties:
-            id:
-              type: integer
-              format: int64
-            createdAt:
-              type: string
-              format: date-time
-            createdBy:
-              type: string
-            updatedAt:
-              type: string
-              format: date-time
-            updatedBy:
-              type: string
     ResponsibilityTypeRequest:
       type: object
-      required: [name]
+      required:
+        - name
       properties:
         name:
           type: string
@@ -1452,7 +1226,10 @@ components:
               type: string
     SystemAcronymResponsibilityRequest:
       type: object
-      required: [acronymId, responsibilityId, teamId]
+      required:
+        - acronymId
+        - responsibilityId
+        - teamId
       properties:
         acronymId:
           type: integer
@@ -1461,9 +1238,6 @@ components:
           type: integer
           format: int64
         teamId:
-          type: integer
-          format: int64
-        userAppId:
           type: integer
           format: int64
         active:
@@ -1488,7 +1262,9 @@ components:
               type: string
     BusinessDomainRequest:
       type: object
-      required: [ name, unitId ]
+      required:
+        - name
+        - unitId
       properties:
         name:
           type: string
@@ -1509,9 +1285,8 @@ components:
           type: string
         description:
           type: string
-        unitId:
-          type: integer
-          format: int64
+        businessUnit:
+          $ref: '#/components/schemas/BusinessUnitResponse'
         active:
           type: boolean
         createdBy:
@@ -1526,7 +1301,8 @@ components:
           format: date-time
     BusinessUnitRequest:
       type: object
-      required: [ name ]
+      required:
+        - name
       properties:
         name:
           type: string
@@ -1556,7 +1332,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-
     ErrorResponse:
       type: object
       required:
@@ -1569,17 +1344,17 @@ components:
         timestamp:
           type: string
           format: date-time
-          example: "2025-06-25T12:34:56Z"
+          example: '2025-06-25T12:34:56Z'
         status:
           type: integer
           format: int64
           example: 40X
         error:
           type: string
-          example: "Bad Request or Not Found or Not Authorized or Internal Server Error"
+          example: Bad Request or Not Found or Not Authorized or Internal Server Error
         message:
           type: string
-          example: "Invalid input data"
+          example: Invalid input data
         path:
           type: string
-          example: "/v1/xxx"
+          example: /v1/xxx

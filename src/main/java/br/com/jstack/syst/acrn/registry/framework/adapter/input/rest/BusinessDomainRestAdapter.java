@@ -25,7 +25,7 @@ public class BusinessDomainRestAdapter implements BusinessDomainApi {
     private final CreateUseCase<BusinessDomain>             createUseCase;
     private final RetrieveByIdUseCase<BusinessDomain, Long> retrieveByIdUseCase;
     private final RetrieveAllUseCase<BusinessDomain>        retrieveAllUseCase;
-    private final UpdateUseCase<BusinessDomain, Long>       updateUseCase;
+    private final UpdateUseCase<BusinessDomain,Long>       updateUseCase;
     private final DeleteByIdUseCase<BusinessDomain, Long>   deleteUseCase;
     
     
@@ -59,7 +59,8 @@ public class BusinessDomainRestAdapter implements BusinessDomainApi {
     @Override
     public ResponseEntity<BusinessDomainResponse> updateBusinessDomain(Long id, BusinessDomainRequest request) {
         BusinessDomain         businessUnit = mapper.toEntity(request);
-        BusinessDomain         updated      = updateUseCase.update(id, businessUnit);
+        businessUnit.setId(id);
+	    BusinessDomain updated = updateUseCase.update(businessUnit);
         BusinessDomainResponse response     = mapper.toResponse(updated);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

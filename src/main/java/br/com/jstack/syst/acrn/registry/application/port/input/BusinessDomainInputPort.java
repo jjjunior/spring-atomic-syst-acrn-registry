@@ -10,6 +10,9 @@ import br.com.jstack.syst.acrn.registry.application.usecase.RetrieveAllUseCase;
 import br.com.jstack.syst.acrn.registry.application.usecase.RetrieveByIdUseCase;
 import br.com.jstack.syst.acrn.registry.application.usecase.UpdateUseCase;
 import br.com.jstack.syst.acrn.registry.domain.entity.BusinessDomain;
+import br.com.jstack.syst.acrn.registry.domain.policy.BusinessDomainEnricher;
+import br.com.jstack.syst.acrn.registry.domain.policy.OperationType;
+import br.com.jstack.syst.acrn.registry.domain.policy.PolicyResolver;
 import br.com.jstack.syst.acrn.registry.domain.policy.ValidationPolicy;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,21 +23,24 @@ import org.springframework.stereotype.Component;
 public class BusinessDomainInputPort implements CreateUseCase<BusinessDomain>,
 	RetrieveByIdUseCase<BusinessDomain, Long>,
 	RetrieveAllUseCase<BusinessDomain>,
-	UpdateUseCase<BusinessDomain, Long>,
+	UpdateUseCase<BusinessDomain,Long>,
 	DeleteByIdUseCase<BusinessDomain, Long> {
 	
-	private final BusinessDomainOutputPort         outputPort;
-	private final ValidationPolicy<BusinessDomain> validationPolicy;
+	private final BusinessDomainOutputPort       outputPort;
+	private final PolicyResolver<BusinessDomain> policyResolver;
+	private final BusinessDomainEnricher         enricher;
 	
 	@Override
-	public BusinessDomain create(@Valid BusinessDomain entity) {
-		validationPolicy.validate(entity);
-		return outputPort.save(entity);
+	public BusinessDomain create(@Valid BusinessDomain domain) {
+		BusinessDomain businessDomain = enricher.enrichWithBusinessUnit(domain);
+		ValidationPolicy<BusinessDomain> policy = policyResolver.resolve(OperationType.CREATE);
+		policy.validate(businessDomain);
+		return outputPort.save(businessDomain);
 	}
 	
 	@Override
 	public BusinessDomain retrieveById(Long id) {
-		return outputPort.findById(id).get();
+		return outputPort.findById(id);
 	}
 	
 	@Override
@@ -43,9 +49,11 @@ public class BusinessDomainInputPort implements CreateUseCase<BusinessDomain>,
 	}
 	
 	@Override
-	public BusinessDomain update(Long id, @Valid BusinessDomain entity) {
-		validationPolicy.validate(entity);
-		return outputPort.update(id, entity);
+	public BusinessDomain update(@Valid BusinessDomain domain) {
+		ValidationPolicy<BusinessDomain> policy = policyResolver.resolve(OperationType.UPDATE);
+		policy.validate(domain);
+		BusinessDomain enriched = enricher.enrichWithBusinessUnit(domain);
+		return outputPort.save(enriched);
 	}
 	
 	@Override

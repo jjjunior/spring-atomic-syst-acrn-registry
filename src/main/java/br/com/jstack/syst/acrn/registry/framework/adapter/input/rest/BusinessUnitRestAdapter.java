@@ -26,7 +26,7 @@ public class BusinessUnitRestAdapter implements BusinessUnitApi {
     private final RetrieveByIdUseCase<BusinessUnit, Long> retrieveByIdUseCase;
     private final RetrieveAllUseCase<BusinessUnit>        retrieveAllUseCase;
     private final UpdateUseCase<BusinessUnit, Long>       updateUseCase;
-    private final DeleteByIdUseCase<BusinessUnit, Long> deleteUseCase;
+    private final DeleteByIdUseCase<BusinessUnit, Long>   deleteUseCase;
     
     @Override
     public ResponseEntity<BusinessUnitResponse> createBusinessUnit(BusinessUnitRequest request) {
@@ -58,7 +58,8 @@ public class BusinessUnitRestAdapter implements BusinessUnitApi {
     @Override
     public ResponseEntity<BusinessUnitResponse> updateBusinessUnit(Long id, BusinessUnitRequest request) {
         BusinessUnit businessUnit = mapper.toEntity(request);
-        BusinessUnit         updated      = updateUseCase.update(id, businessUnit);
+        businessUnit.setId(id);
+        BusinessUnit updated = updateUseCase.update(businessUnit);
         BusinessUnitResponse response     = mapper.toResponse(updated);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

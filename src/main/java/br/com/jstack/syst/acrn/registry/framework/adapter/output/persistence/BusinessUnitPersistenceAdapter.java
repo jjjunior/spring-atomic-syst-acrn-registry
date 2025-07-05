@@ -2,7 +2,6 @@ package br.com.jstack.syst.acrn.registry.framework.adapter.output.persistence;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import br.com.jstack.syst.acrn.registry.application.port.output.BusinessUnitOutputPort;
 import br.com.jstack.syst.acrn.registry.domain.entity.BusinessUnit;
@@ -10,6 +9,7 @@ import br.com.jstack.syst.acrn.registry.framework.adapter.output.persistence.rep
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
@@ -33,26 +33,27 @@ public class BusinessUnitPersistenceAdapter implements BusinessUnitOutputPort {
 	}
 	
 	@Override
-	public Optional<BusinessUnit> findById(Long aLong) {
-		return repository.findById(aLong);
+	public BusinessUnit findById(Long id) {
+		BusinessUnit businessUnit = repository.findById(id)
+			.orElseThrow(() -> new NoSuchElementException("Business Unit not found with id: " + id));
+		return businessUnit;
 	}
 	
 	@Override
 	public List<BusinessUnit> findAll() {
-		return repository.findAll();
+		return repository.findAll(Sort.by("id").ascending());
 	}
 	
 	@Transactional
 	@Override
-	public void deleteById(Long aLong) {
-		repository.deleteById(aLong);
+	public void deleteById(Long id) {
+		repository.deleteById(id);
 	}
 	
 	@Transactional
 	@Override
-	public BusinessUnit update(Long id, BusinessUnit domain) {
-		BusinessUnit existing = repository.findById(id)
-			.orElseThrow(() -> new NoSuchElementException("Business Unit not found with id: " + id));
+	public BusinessUnit update(BusinessUnit domain) {
+		BusinessUnit existing = findById(domain.getId());
 		existing.setName(domain.getName());
 		existing.setDescription(domain.getDescription());
 		existing.setActive(domain.getActive());

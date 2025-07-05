@@ -10,6 +10,8 @@ import br.com.jstack.syst.acrn.registry.application.usecase.RetrieveAllUseCase;
 import br.com.jstack.syst.acrn.registry.application.usecase.RetrieveByIdUseCase;
 import br.com.jstack.syst.acrn.registry.application.usecase.UpdateUseCase;
 import br.com.jstack.syst.acrn.registry.domain.entity.BusinessUnit;
+import br.com.jstack.syst.acrn.registry.domain.policy.OperationType;
+import br.com.jstack.syst.acrn.registry.domain.policy.PolicyResolver;
 import br.com.jstack.syst.acrn.registry.domain.policy.ValidationPolicy;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,21 +22,22 @@ import org.springframework.stereotype.Component;
 public class BusinessUnitInputPort implements CreateUseCase<BusinessUnit>,
 	RetrieveByIdUseCase<BusinessUnit, Long>,
 	RetrieveAllUseCase<BusinessUnit>,
-	UpdateUseCase<BusinessUnit, Long>,
+	UpdateUseCase<BusinessUnit,Long>,
 	DeleteByIdUseCase<BusinessUnit, Long> {
 	
-	private final BusinessUnitOutputPort outputPort;
-	private final ValidationPolicy<BusinessUnit> validationPolicy;
+	private final BusinessUnitOutputPort       outputPort;
+	private final PolicyResolver<BusinessUnit> policyResolver;
 	
 	@Override
-	public BusinessUnit create(@Valid BusinessUnit entity) {
-		validationPolicy.validate(entity);
-		return outputPort.save(entity);
+	public BusinessUnit create(@Valid BusinessUnit domain) {
+		ValidationPolicy<BusinessUnit> policy = policyResolver.resolve(OperationType.CREATE);
+		policy.validate(domain);
+		return outputPort.save(domain);
 	}
 	
 	@Override
 	public BusinessUnit retrieveById(Long id) {
-		return outputPort.findById(id).get();
+		return outputPort.findById(id);
 	}
 	
 	@Override
@@ -43,9 +46,10 @@ public class BusinessUnitInputPort implements CreateUseCase<BusinessUnit>,
 	}
 	
 	@Override
-	public BusinessUnit update(Long id, @Valid BusinessUnit entity) {
-		validationPolicy.validate(entity);
-		return outputPort.update(id, entity);
+	public BusinessUnit update(@Valid BusinessUnit domain) {
+		ValidationPolicy<BusinessUnit> policy = policyResolver.resolve(OperationType.UPDATE);
+		policy.validate(domain);
+		return outputPort.update(domain);
 	}
 	
 	@Override

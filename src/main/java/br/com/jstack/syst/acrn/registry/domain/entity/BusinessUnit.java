@@ -13,6 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -31,7 +32,8 @@ import lombok.Setter;
 public class BusinessUnit {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "business_unit_seq")
+	@SequenceGenerator(name = "business_unit_seq", sequenceName = "business_unit_business_unit_id_seq", allocationSize = 1)
 	@Column(name = "business_unit_id")
 	private Long id;
 	

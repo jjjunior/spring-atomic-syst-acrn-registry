@@ -9,15 +9,20 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class BusinessDomainPolicy implements ValidationPolicy<BusinessDomain> {
+public class BusinessDomainCreatePolicy implements ValidationPolicy<BusinessDomain> {
 	
 	private final BusinessDomainOutputPort port;
+	
+	@Override
+	public boolean supports(OperationType operation) {
+		return operation == OperationType.CREATE;
+	}
 	
 	@Override
 	public void validate(BusinessDomain domain) {
 		Specification<BusinessDomain> spec = new BusinessDomainUniqueNameSpec(port);
 		if (!spec.isSatisfiedBy(domain)) {
-			throw new IllegalArgumentException("Domain Domain already exists");
+			throw new IllegalArgumentException("BusinessDomain name must be unique.");
 		}
 	}
 }

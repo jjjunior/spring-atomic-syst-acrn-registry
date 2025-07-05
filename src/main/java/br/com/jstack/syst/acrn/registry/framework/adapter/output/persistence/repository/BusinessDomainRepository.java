@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BusinessDomainRepository extends JpaRepository<BusinessDomain, Long> {
 	Optional<BusinessDomain> findByName(String name);
+	Optional<BusinessDomain> findByNameAndIdNot(String name, Long id);
 }
