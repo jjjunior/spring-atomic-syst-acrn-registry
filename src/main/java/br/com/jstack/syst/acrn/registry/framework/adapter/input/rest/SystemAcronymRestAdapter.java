@@ -10,30 +10,30 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class SystemAcronymRestAdapter implements SystemAcronymApi {
-    
-    @Override
-    public ResponseEntity<SystemAcronymResponse> createSystemAcronym(SystemAcronymRequest systemAcronymRequest) {
-        return SystemAcronymApi.super.createSystemAcronym(systemAcronymRequest);
-    }
-    
-    @Override
-    public ResponseEntity<Void> deleteSystemAcronym(Long id) {
-        return SystemAcronymApi.super.deleteSystemAcronym(id);
-    }
-    
-    
-    @Override
-    public ResponseEntity<List<SystemAcronymResponse>> listSystemAcronyms(Boolean active, Long typeId, Long domainId) {
-        return SystemAcronymApi.super.listSystemAcronyms(active, typeId, domainId);
-    }
-    
-    @Override
-    public ResponseEntity<SystemAcronymResponse> retrieveSystemAcronym(Long id) {
-        return SystemAcronymApi.super.retrieveSystemAcronym(id);
-    }
-    
-    @Override
-    public ResponseEntity<SystemAcronymResponse> updateSystemAcronym(Long id, SystemAcronymRequest systemAcronymRequest) {
-        return SystemAcronymApi.super.updateSystemAcronym(id, systemAcronymRequest);
-    }
+	
+	@Override
+	public ResponseEntity<SystemAcronymResponse> createSystemAcronym(SystemAcronymRequest systemAcronymRequest) {
+		return SystemAcronymApi.super.createSystemAcronym(systemAcronymRequest);
+	}
+	
+	@Override
+	public ResponseEntity<Void> deleteSystemAcronym(Long id) {
+		return SystemAcronymApi.super.deleteSystemAcronym(id);
+	}
+	
+	
+	@Override
+	public ResponseEntity<List<SystemAcronymResponse>> listSystemAcronyms(Boolean active, Long typeId, Long domainId) {
+		return SystemAcronymApi.super.listSystemAcronyms(active, typeId, domainId);
+	}
+	
+	@Override
+	public ResponseEntity<SystemAcronymResponse> retrieveSystemAcronym(Long id) {
+		return SystemAcronymApi.super.retrieveSystemAcronym(id);
+	}
+	
+	@Override
+	public ResponseEntity<SystemAcronymResponse> updateSystemAcronym(Long id, SystemAcronymRequest systemAcronymRequest) {
+		return SystemAcronymApi.super.updateSystemAcronym(id, systemAcronymRequest);
+	}
 }
