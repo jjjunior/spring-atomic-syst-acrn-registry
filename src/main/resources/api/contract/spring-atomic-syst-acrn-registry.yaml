@@ -16,8 +16,9 @@ tags:
   - name: Team
   - name: ResponsibilityType
   - name: BusinessUnit
-  - name: BusinessSystemAcronymResponsibility
+  - name: SystemAcronymResponsibility
   - name: SystemAcronym
+  - name: SystemAcronymType
 paths:
   /v1/teams:
     get:
@@ -397,10 +398,79 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+  /v1/system-acronym-responsibilities:
+    get:
+      tags:
+        - SystemAcronymResponsibility
+      summary: List system acronym responsibilities
+      operationId: listSystemAcronymResponsibilities
+      responses:
+        '200':
+          description: List of system acronym responsibilities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SystemAcronymResponsibilityResponse'
+        404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+        - SystemAcronymResponsibility
+      summary: Create a system acronym responsibility
+      operationId: createSystemAcronymResponsibility
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SystemAcronymResponsibilityRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAcronymResponsibilityResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /v1/system-acronym-responsibilities/{id}:
     get:
       tags:
-        - BusinessSystemAcronymResponsibility
+        - SystemAcronymResponsibility
       summary: Get system acronym responsibility by ID
       operationId: retrieveSystemAcronymResponsibility
       parameters:
@@ -437,7 +507,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
     put:
       tags:
-        - BusinessSystemAcronymResponsibility
+        - SystemAcronymResponsibility
       summary: Update system acronym responsibility
       operationId: updateSystemAcronymResponsibility
       parameters:
@@ -486,9 +556,198 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
     delete:
       tags:
-        - BusinessSystemAcronymResponsibility
+        - SystemAcronymResponsibility
       summary: Delete system acronym responsibility
       operationId: deleteSystemAcronymResponsibility
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Deleted
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/system-acronym-types:
+    get:
+      tags:
+        - SystemAcronymType
+      summary: List acronym types
+      operationId: listAcronymTypes
+      responses:
+        '200':
+          description: List
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SystemAcronymTypeResponse'
+        404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+        - SystemAcronymType
+      summary: Create a Acronym Type
+      operationId: createAcronymType
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SystemAcronymTypeRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAcronymTypeResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/system-acronym-types/{id}:
+    get:
+      tags:
+        - SystemAcronymType
+      summary: Get system acronym type by ID
+      operationId: retrieveSystemAcronymType
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: System acronym type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAcronymTypeResponse'
+        404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+        - SystemAcronymType
+      summary: Update system acronym type
+      operationId: updateSystemAcronymType
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SystemAcronymTypeRequest'
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAcronymTypeResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - SystemAcronymType
+      summary: Delete system acronym type
+      operationId: deleteSystemAcronymType
       parameters:
         - name: id
           in: path
@@ -1100,13 +1359,39 @@ components:
       scheme: bearer
       bearerFormat: JWT
   schemas:
+    SystemAcronymTypeRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        active:
+          type: boolean
+    SystemAcronymTypeResponse:
+      allOf:
+        - $ref: '#/components/schemas/SystemAcronymTypeRequest'
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+            created_by:
+              type: string
+            created_at:
+              type: string
+              format: date-time
+            updated_by:
+              type: string
+            updated_at:
+              type: string
+              format: date-time
     SystemAcronymRequest:
       type: object
       required:
-        - acronym
         - name
-        - domainId
-        - typeId
       properties:
         acronym:
           type: string
