@@ -10,10 +10,10 @@ import br.com.jstack.syst.acrn.registry.application.usecase.RetrieveAllUseCase;
 import br.com.jstack.syst.acrn.registry.application.usecase.RetrieveByIdUseCase;
 import br.com.jstack.syst.acrn.registry.application.usecase.UpdateUseCase;
 import br.com.jstack.syst.acrn.registry.domain.entity.BusinessDomain;
-import br.com.jstack.syst.acrn.registry.domain.policy.BusinessDomainEnricher;
-import br.com.jstack.syst.acrn.registry.domain.policy.OperationType;
+import br.com.jstack.syst.acrn.registry.domain.vo.OperationType;
 import br.com.jstack.syst.acrn.registry.domain.policy.PolicyResolver;
 import br.com.jstack.syst.acrn.registry.domain.policy.ValidationPolicy;
+import br.com.jstack.syst.acrn.registry.domain.policy.BusinessDomainEnricher;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 public class BusinessDomainInputPort implements CreateUseCase<BusinessDomain>,
 	RetrieveByIdUseCase<BusinessDomain, Long>,
 	RetrieveAllUseCase<BusinessDomain>,
-	UpdateUseCase<BusinessDomain,Long>,
+	UpdateUseCase<BusinessDomain, Long>,
 	DeleteByIdUseCase<BusinessDomain, Long> {
 	
 	private final BusinessDomainOutputPort       outputPort;
@@ -32,8 +32,8 @@ public class BusinessDomainInputPort implements CreateUseCase<BusinessDomain>,
 	
 	@Override
 	public BusinessDomain create(@Valid BusinessDomain domain) {
-		BusinessDomain businessDomain = enricher.enrichWithBusinessUnit(domain);
-		ValidationPolicy<BusinessDomain> policy = policyResolver.resolve(OperationType.CREATE);
+		BusinessDomain                   businessDomain = enricher.enrichWithBusinessUnit(domain);
+		ValidationPolicy<BusinessDomain> policy         = policyResolver.resolve(OperationType.CREATE, BusinessDomain.class);
 		policy.validate(businessDomain);
 		return outputPort.save(businessDomain);
 	}
@@ -50,7 +50,7 @@ public class BusinessDomainInputPort implements CreateUseCase<BusinessDomain>,
 	
 	@Override
 	public BusinessDomain update(@Valid BusinessDomain domain) {
-		ValidationPolicy<BusinessDomain> policy = policyResolver.resolve(OperationType.UPDATE);
+		ValidationPolicy<BusinessDomain> policy = policyResolver.resolve(OperationType.UPDATE, BusinessDomain.class);
 		policy.validate(domain);
 		BusinessDomain enriched = enricher.enrichWithBusinessUnit(domain);
 		return outputPort.save(enriched);

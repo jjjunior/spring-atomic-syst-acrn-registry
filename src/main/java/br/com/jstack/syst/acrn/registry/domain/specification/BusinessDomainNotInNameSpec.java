@@ -11,6 +11,6 @@ public class BusinessDomainNotInNameSpec implements Specification<BusinessDomain
 	
 	@Override
 	public boolean isSatisfiedBy(BusinessDomain domain) {
-		return  !port.existsByNameAndIdNot(domain.getName(), domain.getId());
+		return !port.existsByNameAndIdNot(domain.getName(), domain.getId());
 	}
 }

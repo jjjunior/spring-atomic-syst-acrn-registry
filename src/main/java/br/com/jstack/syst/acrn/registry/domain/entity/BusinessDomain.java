@@ -33,10 +33,10 @@ public class BusinessDomain {
 	private Long id;
 	
 	@NotBlank(message = "Name cannot be blank")
-	private String  name;
+	private String name;
 	
 	@NotBlank(message = "Description cannot be blank")
-	private String  description;
+	private String description;
 	
 	@NotNull(message = "Active status cannot be null")
 	private Boolean active;

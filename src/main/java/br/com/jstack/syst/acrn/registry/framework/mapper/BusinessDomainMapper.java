@@ -12,7 +12,7 @@ public interface BusinessDomainMapper {
 	@Mapping(target = "businessUnit.id", source = "unitId")
 	@Mapping(target = "id", ignore = true)
 	@Mapping(target = "audit", ignore = true)
-	BusinessDomain toEntity(BusinessDomainRequest request);
+	BusinessDomain toDomain(BusinessDomainRequest request);
 	
 	@Mapping(target = "updatedBy", source = "audit.updatedBy")
 	@Mapping(target = "updatedAt", source = "audit.updatedAt")

@@ -26,7 +26,7 @@ public class BusinessDomainPersistenceAdapter implements BusinessDomainOutputPor
 	
 	@Override
 	public boolean existsByNameAndIdNot(String name, Long id) {
-		 return !repository.findByNameAndIdNot(name, id).isEmpty();
+		return !repository.findByNameAndIdNot(name, id).isEmpty();
 	}
 	
 	@Transactional
