@@ -29,9 +29,9 @@ public class SystemAcronymTypeInputPort implements CreateUseCase<SystemAcronymTy
 	private final PolicyResolver<SystemAcronymType> policyResolver;
 	
 	@Override
-	public SystemAcronymType create(SystemAcronymType domain) {
+	public SystemAcronymType create(@Valid SystemAcronymType domain) {
 		ValidationPolicy<SystemAcronymType> policy = policyResolver.resolve(OperationType.CREATE, SystemAcronymType.class);
-		policy.validate(domain);
+		policy.validate(domain, OperationType.CREATE);
 		return outputPort.save(domain);
 	}
 	
@@ -48,7 +48,7 @@ public class SystemAcronymTypeInputPort implements CreateUseCase<SystemAcronymTy
 	@Override
 	public SystemAcronymType update(@Valid SystemAcronymType domain) {
 		ValidationPolicy<SystemAcronymType> policy = policyResolver.resolve(OperationType.UPDATE, SystemAcronymType.class);
-		policy.validate(domain);
+		policy.validate(domain, OperationType.UPDATE);
 		return outputPort.update(domain);
 	}
 	

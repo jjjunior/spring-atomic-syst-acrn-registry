@@ -24,6 +24,11 @@ public class SystemAcronymTypePersistenceAdapter implements SystemAcronymTypeOut
 		return repository.findByName(name).isPresent();
 	}
 	
+	@Override
+	public boolean existsByNameAndIdNot(String name, Long id) {
+		return repository.findByNameAndIdNot(name, id).isPresent();
+	}
+	
 	@Transactional
 	@Override
 	public SystemAcronymType save(SystemAcronymType domain) {
