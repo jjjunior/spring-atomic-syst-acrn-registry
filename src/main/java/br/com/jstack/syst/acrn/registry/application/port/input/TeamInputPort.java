@@ -29,9 +29,9 @@ public class TeamInputPort implements CreateUseCase<Team>,
 	private final PolicyResolver<Team> policyResolver;
 	
 	@Override
-	public Team create(Team domain) {
+	public Team create(@Valid Team domain) {
 		ValidationPolicy<Team> policy = policyResolver.resolve(OperationType.CREATE, Team.class);
-		policy.validate(domain);
+		policy.validate(domain, OperationType.CREATE);
 		return outputPort.save(domain);
 	}
 	
@@ -48,7 +48,7 @@ public class TeamInputPort implements CreateUseCase<Team>,
 	@Override
 	public Team update(@Valid Team domain) {
 		ValidationPolicy<Team> policy = policyResolver.resolve(OperationType.UPDATE,Team.class);
-		policy.validate(domain);
+		policy.validate(domain, OperationType.UPDATE);
 		return outputPort.update(domain);
 	}
 	
