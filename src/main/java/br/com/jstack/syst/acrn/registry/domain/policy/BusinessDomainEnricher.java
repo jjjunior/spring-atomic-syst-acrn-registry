@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class BusinessDomainEnricher {
 	
-	private final BusinessUnitCreatePolicy businessUnitCreatePolicy;
+	private final BusinessUnitPolicy businessUnitPolicy;
 	
 	public BusinessDomain enrichWithBusinessUnit(BusinessDomain domain) {
-		BusinessUnit unit = businessUnitCreatePolicy.getValidBusinessUnit(domain.getBusinessUnit().getId());
+		BusinessUnit unit = businessUnitPolicy.getValidBusinessUnit(domain.getBusinessUnit().getId());
 		domain.setBusinessUnit(unit);
 		return domain;
 	}

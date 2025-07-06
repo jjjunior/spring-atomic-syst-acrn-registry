@@ -34,7 +34,7 @@ public class BusinessDomainInputPort implements CreateUseCase<BusinessDomain>,
 	public BusinessDomain create(@Valid BusinessDomain domain) {
 		BusinessDomain                   businessDomain = enricher.enrichWithBusinessUnit(domain);
 		ValidationPolicy<BusinessDomain> policy         = policyResolver.resolve(OperationType.CREATE, BusinessDomain.class);
-		policy.validate(businessDomain);
+		policy.validate(businessDomain, OperationType.CREATE);
 		return outputPort.save(businessDomain);
 	}
 	
@@ -51,7 +51,7 @@ public class BusinessDomainInputPort implements CreateUseCase<BusinessDomain>,
 	@Override
 	public BusinessDomain update(@Valid BusinessDomain domain) {
 		ValidationPolicy<BusinessDomain> policy = policyResolver.resolve(OperationType.UPDATE, BusinessDomain.class);
-		policy.validate(domain);
+		policy.validate(domain, OperationType.UPDATE);
 		BusinessDomain enriched = enricher.enrichWithBusinessUnit(domain);
 		return outputPort.save(enriched);
 	}
