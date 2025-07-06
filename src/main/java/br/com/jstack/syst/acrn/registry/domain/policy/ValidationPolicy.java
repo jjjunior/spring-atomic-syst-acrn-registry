@@ -6,7 +6,7 @@ public interface ValidationPolicy<T> {
 	
 	boolean supports(OperationType operation);
 	
-	void validate(T target);
+	void validate(T target, OperationType operation );
 	
 	Class<T> getTargetType();
 }
