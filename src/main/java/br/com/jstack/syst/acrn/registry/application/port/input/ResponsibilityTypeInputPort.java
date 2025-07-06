@@ -29,9 +29,9 @@ public class ResponsibilityTypeInputPort implements CreateUseCase<Responsibility
 	private final PolicyResolver<ResponsibilityType> policyResolver;
 	
 	@Override
-	public ResponsibilityType create(ResponsibilityType domain) {
+	public ResponsibilityType create(@Valid ResponsibilityType domain) {
 		ValidationPolicy<ResponsibilityType> policy = policyResolver.resolve(OperationType.CREATE, ResponsibilityType.class);
-		policy.validate(domain);
+		policy.validate(domain, OperationType.CREATE);
 		return outputPort.save(domain);
 	}
 	
@@ -48,7 +48,7 @@ public class ResponsibilityTypeInputPort implements CreateUseCase<Responsibility
 	@Override
 	public ResponsibilityType update(@Valid ResponsibilityType domain) {
 		ValidationPolicy<ResponsibilityType> policy = policyResolver.resolve(OperationType.UPDATE, ResponsibilityType.class);
-		policy.validate(domain);
+		policy.validate(domain, OperationType.UPDATE);
 		return outputPort.update(domain);
 	}
 	
