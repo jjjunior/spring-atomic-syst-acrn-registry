@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 public class ResponsibilityTypeInputPort implements CreateUseCase<ResponsibilityType>,
 	RetrieveByIdUseCase<ResponsibilityType, Long>,
 	RetrieveAllUseCase<ResponsibilityType>,
-	UpdateUseCase<ResponsibilityType, Long>,
+	UpdateUseCase<ResponsibilityType>,
 	DeleteByIdUseCase<ResponsibilityType, Long> {
 	
 	private final ResponsibilityTypeOutputPort       outputPort;
@@ -53,7 +53,7 @@ public class ResponsibilityTypeInputPort implements CreateUseCase<Responsibility
 	}
 	
 	@Override
-	public void deleteteById(Long id) {
+	public void deleteById(Long id) {
 		outputPort.deleteById(id);
 	}
 }

@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 public class SystemAcronymTypeInputPort implements CreateUseCase<SystemAcronymType>,
 	RetrieveByIdUseCase<SystemAcronymType, Long>,
 	RetrieveAllUseCase<SystemAcronymType>,
-	UpdateUseCase<SystemAcronymType, Long>,
+	UpdateUseCase<SystemAcronymType>,
 	DeleteByIdUseCase<SystemAcronymType, Long> {
 	
 	private final SystemAcronymTypeOutputPort       outputPort;
@@ -53,7 +53,7 @@ public class SystemAcronymTypeInputPort implements CreateUseCase<SystemAcronymTy
 	}
 	
 	@Override
-	public void deleteteById(Long id) {
+	public void deleteById(Long id) {
 		outputPort.deleteById(id);
 	}
 }

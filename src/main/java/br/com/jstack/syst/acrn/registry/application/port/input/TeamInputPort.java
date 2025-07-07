@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 public class TeamInputPort implements CreateUseCase<Team>,
 	RetrieveByIdUseCase<Team, Long>,
 	RetrieveAllUseCase<Team>,
-	UpdateUseCase<Team, Long>,
+	UpdateUseCase<Team>,
 	DeleteByIdUseCase<Team, Long> {
 	
 	private final TeamOutputPort       outputPort;
@@ -53,7 +53,7 @@ public class TeamInputPort implements CreateUseCase<Team>,
 	}
 	
 	@Override
-	public void deleteteById(Long id) {
+	public void deleteById(Long id) {
 		outputPort.deleteById(id);
 	}
 }

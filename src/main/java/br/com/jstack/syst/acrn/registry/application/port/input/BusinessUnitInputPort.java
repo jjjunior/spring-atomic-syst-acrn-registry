@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 public class BusinessUnitInputPort implements CreateUseCase<BusinessUnit>,
 	RetrieveByIdUseCase<BusinessUnit, Long>,
 	RetrieveAllUseCase<BusinessUnit>,
-	UpdateUseCase<BusinessUnit, Long>,
+	UpdateUseCase<BusinessUnit>,
 	DeleteByIdUseCase<BusinessUnit, Long> {
 	
 	private final BusinessUnitOutputPort       outputPort;
@@ -53,7 +53,7 @@ public class BusinessUnitInputPort implements CreateUseCase<BusinessUnit>,
 	}
 	
 	@Override
-	public void deleteteById(Long id) {
+	public void deleteById(Long id) {
 		outputPort.deleteById(id);
 	}
 }
