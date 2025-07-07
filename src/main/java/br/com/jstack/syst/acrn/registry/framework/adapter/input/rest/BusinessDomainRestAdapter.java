@@ -25,7 +25,7 @@ public class BusinessDomainRestAdapter implements BusinessDomainApi {
 	private final CreateUseCase<BusinessDomain>             createUseCase;
 	private final RetrieveByIdUseCase<BusinessDomain, Long> retrieveByIdUseCase;
 	private final RetrieveAllUseCase<BusinessDomain>        retrieveAllUseCase;
-	private final UpdateUseCase<BusinessDomain, Long>       updateUseCase;
+	private final UpdateUseCase<BusinessDomain>       updateUseCase;
 	private final DeleteByIdUseCase<BusinessDomain, Long>   deleteUseCase;
 	
 	
@@ -38,7 +38,7 @@ public class BusinessDomainRestAdapter implements BusinessDomainApi {
 	
 	@Override
 	public ResponseEntity<Void> deleteBusinessDomain(Long id) {
-		deleteUseCase.deleteteById(id);
+		deleteUseCase.deleteById(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	

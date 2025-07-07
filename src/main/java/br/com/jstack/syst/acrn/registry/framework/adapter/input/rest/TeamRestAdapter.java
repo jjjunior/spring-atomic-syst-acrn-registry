@@ -25,7 +25,7 @@ public class TeamRestAdapter implements TeamApi {
 	private final CreateUseCase<Team>             createUseCase;
 	private final RetrieveByIdUseCase<Team, Long> retrieveByIdUseCase;
 	private final RetrieveAllUseCase<Team>        retrieveAllUseCase;
-	private final UpdateUseCase<Team, Long>       updateUseCase;
+	private final UpdateUseCase<Team>       updateUseCase;
 	private final DeleteByIdUseCase<Team, Long>   deleteUseCase;
 	
 	@Override
@@ -37,7 +37,7 @@ public class TeamRestAdapter implements TeamApi {
 	
 	@Override
 	public ResponseEntity<Void> deleteTeam(Long id) {
-		deleteUseCase.deleteteById(id);
+		deleteUseCase.deleteById(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	

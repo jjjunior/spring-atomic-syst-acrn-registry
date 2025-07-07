@@ -25,7 +25,7 @@ public class SystemAcronymTypeRestAdapter implements SystemAcronymTypeApi {
 	private final CreateUseCase<SystemAcronymType>             createUseCase;
 	private final RetrieveByIdUseCase<SystemAcronymType, Long> retrieveByIdUseCase;
 	private final RetrieveAllUseCase<SystemAcronymType>        retrieveAllUseCase;
-	private final UpdateUseCase<SystemAcronymType, Long>       updateUseCase;
+	private final UpdateUseCase<SystemAcronymType>       updateUseCase;
 	private final DeleteByIdUseCase<SystemAcronymType, Long>   deleteUseCase;
 	
 	@Override
@@ -37,7 +37,7 @@ public class SystemAcronymTypeRestAdapter implements SystemAcronymTypeApi {
 	
 	@Override
 	public ResponseEntity<Void> deleteSystemAcronymType(Long id) {
-		deleteUseCase.deleteteById(id);
+		deleteUseCase.deleteById(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	

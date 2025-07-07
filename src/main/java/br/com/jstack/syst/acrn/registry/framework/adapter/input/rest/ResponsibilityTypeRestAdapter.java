@@ -25,7 +25,7 @@ public class ResponsibilityTypeRestAdapter implements ResponsibilityTypeApi {
 	private final CreateUseCase<ResponsibilityType> createUseCase;
 	private final RetrieveByIdUseCase<ResponsibilityType, Long> retrieveByIdUseCase;
 	private final RetrieveAllUseCase<ResponsibilityType>        retrieveAllUseCase;
-	private final UpdateUseCase<ResponsibilityType, Long>       updateUseCase;
+	private final UpdateUseCase<ResponsibilityType>       updateUseCase;
 	private final DeleteByIdUseCase<ResponsibilityType, Long>   deleteUseCase;
 	
 	
@@ -38,7 +38,7 @@ public class ResponsibilityTypeRestAdapter implements ResponsibilityTypeApi {
 	
 	@Override
 	public ResponseEntity<Void> deleteResponsibilityType(Long id) {
-		deleteUseCase.deleteteById(id);
+		deleteUseCase.deleteById(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
