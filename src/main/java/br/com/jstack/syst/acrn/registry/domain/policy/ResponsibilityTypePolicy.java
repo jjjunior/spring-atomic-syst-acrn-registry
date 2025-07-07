@@ -1,7 +1,6 @@
 package br.com.jstack.syst.acrn.registry.domain.policy;
 
 import br.com.jstack.syst.acrn.registry.application.port.output.ResponsibilityTypeOutputPort;
-import br.com.jstack.syst.acrn.registry.domain.entity.BusinessUnit;
 import br.com.jstack.syst.acrn.registry.domain.entity.ResponsibilityType;
 import br.com.jstack.syst.acrn.registry.domain.specification.Specification;
 import br.com.jstack.syst.acrn.registry.domain.specification.SpecificationFactory;

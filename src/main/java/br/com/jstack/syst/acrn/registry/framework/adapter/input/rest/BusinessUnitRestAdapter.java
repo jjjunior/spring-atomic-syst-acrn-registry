@@ -25,7 +25,7 @@ public class BusinessUnitRestAdapter implements BusinessUnitApi {
 	private final CreateUseCase<BusinessUnit>             createUseCase;
 	private final RetrieveByIdUseCase<BusinessUnit, Long> retrieveByIdUseCase;
 	private final RetrieveAllUseCase<BusinessUnit>        retrieveAllUseCase;
-	private final UpdateUseCase<BusinessUnit>       updateUseCase;
+	private final UpdateUseCase<BusinessUnit>             updateUseCase;
 	private final DeleteByIdUseCase<BusinessUnit, Long>   deleteUseCase;
 	
 	@Override

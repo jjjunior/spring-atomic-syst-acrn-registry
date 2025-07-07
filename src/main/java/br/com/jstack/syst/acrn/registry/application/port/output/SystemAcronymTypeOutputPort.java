@@ -4,5 +4,6 @@ import br.com.jstack.syst.acrn.registry.domain.entity.SystemAcronymType;
 
 public interface SystemAcronymTypeOutputPort extends PersistencePort<SystemAcronymType, Long> {
 	boolean existsByName(String name);
+	
 	boolean existsByNameAndIdNot(String name, Long id);
 }

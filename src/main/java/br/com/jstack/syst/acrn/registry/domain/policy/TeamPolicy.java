@@ -1,7 +1,6 @@
 package br.com.jstack.syst.acrn.registry.domain.policy;
 
 import br.com.jstack.syst.acrn.registry.application.port.output.TeamOutputPort;
-import br.com.jstack.syst.acrn.registry.domain.entity.SystemAcronymType;
 import br.com.jstack.syst.acrn.registry.domain.entity.Team;
 import br.com.jstack.syst.acrn.registry.domain.specification.Specification;
 import br.com.jstack.syst.acrn.registry.domain.specification.SpecificationFactory;

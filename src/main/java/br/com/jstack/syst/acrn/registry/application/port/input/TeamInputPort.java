@@ -10,9 +10,9 @@ import br.com.jstack.syst.acrn.registry.application.usecase.RetrieveAllUseCase;
 import br.com.jstack.syst.acrn.registry.application.usecase.RetrieveByIdUseCase;
 import br.com.jstack.syst.acrn.registry.application.usecase.UpdateUseCase;
 import br.com.jstack.syst.acrn.registry.domain.entity.Team;
-import br.com.jstack.syst.acrn.registry.domain.vo.OperationType;
 import br.com.jstack.syst.acrn.registry.domain.policy.PolicyResolver;
 import br.com.jstack.syst.acrn.registry.domain.policy.ValidationPolicy;
+import br.com.jstack.syst.acrn.registry.domain.vo.OperationType;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -47,7 +47,7 @@ public class TeamInputPort implements CreateUseCase<Team>,
 	
 	@Override
 	public Team update(@Valid Team domain) {
-		ValidationPolicy<Team> policy = policyResolver.resolve(OperationType.UPDATE,Team.class);
+		ValidationPolicy<Team> policy = policyResolver.resolve(OperationType.UPDATE, Team.class);
 		policy.validate(domain, OperationType.UPDATE);
 		return outputPort.update(domain);
 	}

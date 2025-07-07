@@ -25,7 +25,7 @@ public class SystemAcronymTypeRestAdapter implements SystemAcronymTypeApi {
 	private final CreateUseCase<SystemAcronymType>             createUseCase;
 	private final RetrieveByIdUseCase<SystemAcronymType, Long> retrieveByIdUseCase;
 	private final RetrieveAllUseCase<SystemAcronymType>        retrieveAllUseCase;
-	private final UpdateUseCase<SystemAcronymType>       updateUseCase;
+	private final UpdateUseCase<SystemAcronymType>             updateUseCase;
 	private final DeleteByIdUseCase<SystemAcronymType, Long>   deleteUseCase;
 	
 	@Override

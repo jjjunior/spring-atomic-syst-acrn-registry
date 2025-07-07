@@ -25,7 +25,7 @@ public class TeamRestAdapter implements TeamApi {
 	private final CreateUseCase<Team>             createUseCase;
 	private final RetrieveByIdUseCase<Team, Long> retrieveByIdUseCase;
 	private final RetrieveAllUseCase<Team>        retrieveAllUseCase;
-	private final UpdateUseCase<Team>       updateUseCase;
+	private final UpdateUseCase<Team>             updateUseCase;
 	private final DeleteByIdUseCase<Team, Long>   deleteUseCase;
 	
 	@Override

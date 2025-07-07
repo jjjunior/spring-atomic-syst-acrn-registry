@@ -21,11 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ResponsibilityTypeRestAdapter implements ResponsibilityTypeApi {
 	
-	private final ResponsibilityMapper              mapper;
-	private final CreateUseCase<ResponsibilityType> createUseCase;
+	private final ResponsibilityMapper                          mapper;
+	private final CreateUseCase<ResponsibilityType>             createUseCase;
 	private final RetrieveByIdUseCase<ResponsibilityType, Long> retrieveByIdUseCase;
 	private final RetrieveAllUseCase<ResponsibilityType>        retrieveAllUseCase;
-	private final UpdateUseCase<ResponsibilityType>       updateUseCase;
+	private final UpdateUseCase<ResponsibilityType>             updateUseCase;
 	private final DeleteByIdUseCase<ResponsibilityType, Long>   deleteUseCase;
 	
 	

@@ -25,7 +25,7 @@ public class BusinessDomainRestAdapter implements BusinessDomainApi {
 	private final CreateUseCase<BusinessDomain>             createUseCase;
 	private final RetrieveByIdUseCase<BusinessDomain, Long> retrieveByIdUseCase;
 	private final RetrieveAllUseCase<BusinessDomain>        retrieveAllUseCase;
-	private final UpdateUseCase<BusinessDomain>       updateUseCase;
+	private final UpdateUseCase<BusinessDomain>             updateUseCase;
 	private final DeleteByIdUseCase<BusinessDomain, Long>   deleteUseCase;
 	
 	

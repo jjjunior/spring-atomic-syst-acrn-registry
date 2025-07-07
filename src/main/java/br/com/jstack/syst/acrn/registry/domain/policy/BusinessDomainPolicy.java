@@ -4,7 +4,6 @@ import br.com.jstack.syst.acrn.registry.application.port.output.BusinessDomainOu
 import br.com.jstack.syst.acrn.registry.domain.entity.BusinessDomain;
 import br.com.jstack.syst.acrn.registry.domain.specification.Specification;
 import br.com.jstack.syst.acrn.registry.domain.specification.SpecificationFactory;
-
 import br.com.jstack.syst.acrn.registry.domain.vo.OperationType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class BusinessDomainPolicy implements ValidationPolicy<BusinessDomain> {
 	
-	private final SpecificationFactory specFactory;
+	private final SpecificationFactory     specFactory;
 	private final BusinessDomainOutputPort outputPort;
 	
 	@Override
