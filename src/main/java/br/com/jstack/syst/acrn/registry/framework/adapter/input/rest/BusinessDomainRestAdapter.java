@@ -1,7 +1,6 @@
 package br.com.jstack.syst.acrn.registry.framework.adapter.input.rest;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import br.com.jstack.syst.acrn.registry.api.BusinessDomainApi;
 import br.com.jstack.syst.acrn.registry.application.usecase.CreateUseCase;
@@ -16,7 +15,6 @@ import br.com.jstack.syst.acrn.registry.domain.entity.BusinessUnitDomainId;
 import br.com.jstack.syst.acrn.registry.framework.mapper.BusinessDomainMapper;
 import br.com.jstack.syst.acrn.registry.model.BusinessDomainRequest;
 import br.com.jstack.syst.acrn.registry.model.BusinessDomainResponse;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +36,7 @@ public class BusinessDomainRestAdapter implements BusinessDomainApi {
 	public ResponseEntity<BusinessDomainResponse> createBusinessDomain(BusinessDomainRequest request) {
 		BusinessDomain domain = mapper.toDomain(request);
 		populateBusinessUnitDomains(request, domain);
-		BusinessDomain created = createUseCase.create(domain);
+		BusinessDomain         created  = createUseCase.create(domain);
 		BusinessDomainResponse response = mapper.toResponse(created);
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
@@ -60,7 +58,7 @@ public class BusinessDomainRestAdapter implements BusinessDomainApi {
 	
 	@Override
 	public ResponseEntity<BusinessDomainResponse> retrieveBusinessDomain(Long id) {
-		BusinessDomain domain = retrieveByIdUseCase.retrieveById(id);
+		BusinessDomain         domain   = retrieveByIdUseCase.retrieveById(id);
 		BusinessDomainResponse response = mapper.toResponse(domain);
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
@@ -70,7 +68,7 @@ public class BusinessDomainRestAdapter implements BusinessDomainApi {
 		BusinessDomain domain = mapper.toDomain(request);
 		domain.setId(id);
 		populateBusinessUnitDomains(request, domain);
-		BusinessDomain updated = updateUseCase.update(domain);
+		BusinessDomain         updated  = updateUseCase.update(domain);
 		BusinessDomainResponse response = mapper.toResponse(updated);
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}

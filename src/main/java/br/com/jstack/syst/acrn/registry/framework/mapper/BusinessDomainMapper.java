@@ -1,5 +1,8 @@
 package br.com.jstack.syst.acrn.registry.framework.mapper;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import br.com.jstack.syst.acrn.registry.domain.entity.BusinessDomain;
 import br.com.jstack.syst.acrn.registry.domain.entity.BusinessUnit;
 import br.com.jstack.syst.acrn.registry.domain.entity.BusinessUnitDomain;
@@ -9,9 +12,6 @@ import br.com.jstack.syst.acrn.registry.model.BusinessUnitResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface BusinessDomainMapper {

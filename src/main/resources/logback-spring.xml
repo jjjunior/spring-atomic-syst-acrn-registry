@@ -6,7 +6,8 @@
     <springProfile name="local">
         <appender name="COLORED_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
             <encoder>
-                <pattern>%black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%logger{36}): %msg%n%throwable</pattern>
+                <pattern>%black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%logger{36}): %msg%n%throwable
+                </pattern>
             </encoder>
         </appender>
 
