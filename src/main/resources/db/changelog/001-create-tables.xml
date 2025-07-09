@@ -3,10 +3,12 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <!-- Business Unit -->
-    <changeSet id="ddl-001" author="jota">
+    <!-- ============================================= -->
+    <!-- Table: business_unit                         -->
+    <!-- ============================================= -->
+    <changeSet id="table-business-unit-001" author="jota">
         <createTable tableName="business_unit">
             <column name="business_unit_id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -25,17 +27,16 @@
         </createTable>
     </changeSet>
 
-    <!-- Business Domain -->
-    <changeSet id="ddl-002" author="jota">
+    <!-- ============================================= -->
+    <!-- Table: business_domain                       -->
+    <!-- ============================================= -->
+    <changeSet id="table-business-domain-001" author="jota">
         <createTable tableName="business_domain">
             <column name="business_domain_id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="VARCHAR(100)"/>
             <column name="description" type="TEXT"/>
-            <column name="unit_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
             <column name="active" type="BOOLEAN" defaultValueBoolean="true"/>
             <column name="created_by" type="VARCHAR(100)"/>
             <column name="created_at" type="TIMESTAMP"/>
@@ -44,8 +45,28 @@
         </createTable>
     </changeSet>
 
-    <!-- System Acronym Type -->
-    <changeSet id="ddl-003" author="jota">
+    <!-- ============================================= -->
+    <!-- Table: business_unit_domain (N:N)            -->
+    <!-- ============================================= -->
+    <changeSet id="table-business-unit-domain-001" author="jota">
+        <createTable tableName="business_unit_domain">
+            <column name="business_unit_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="business_domain_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(100)"/>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="updated_by" type="VARCHAR(100)"/>
+            <column name="updated_at" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
+    <!-- ============================================= -->
+    <!-- Table: system_acronym_type                   -->
+    <!-- ============================================= -->
+    <changeSet id="table-system-acronym-type-001" author="jota">
         <createTable tableName="system_acronym_type">
             <column name="system_acronym_type_id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -60,8 +81,10 @@
         </createTable>
     </changeSet>
 
-    <!-- Team -->
-    <changeSet id="ddl-004" author="jota">
+    <!-- ============================================= -->
+    <!-- Table: team                                  -->
+    <!-- ============================================= -->
+    <changeSet id="table-team-001" author="jota">
         <createTable tableName="team">
             <column name="team_id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -75,8 +98,10 @@
         </createTable>
     </changeSet>
 
-    <!-- Responsibility Type -->
-    <changeSet id="ddl-006" author="jota">
+    <!-- ============================================= -->
+    <!-- Table: responsibility_type                   -->
+    <!-- ============================================= -->
+    <changeSet id="table-responsibility-type-001" author="jota">
         <createTable tableName="responsibility_type">
             <column name="responsibility_type_id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -91,8 +116,10 @@
         </createTable>
     </changeSet>
 
-    <!-- System Acronym -->
-    <changeSet id="ddl-007" author="jota">
+    <!-- ============================================= -->
+    <!-- Table: system_acronym                        -->
+    <!-- ============================================= -->
+    <changeSet id="table-system-acronym-001" author="jota">
         <createTable tableName="system_acronym">
             <column name="system_acronym_id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -128,8 +155,10 @@
         </createTable>
     </changeSet>
 
-    <!-- System Acronym Responsibility -->
-    <changeSet id="ddl-008" author="jota">
+    <!-- ============================================= -->
+    <!-- Table: system_acronym_responsibility         -->
+    <!-- ============================================= -->
+    <changeSet id="table-system-acronym-resp-001" author="jota">
         <createTable tableName="system_acronym_responsibility">
             <column name="system_acronym_responsibility_id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>

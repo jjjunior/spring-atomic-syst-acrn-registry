@@ -8,5 +8,4 @@
     <include file="/db/changelog/001-create-tables.xml"/>
     <include file="/db/changelog/002-create-foreign-keys.xml"/>
     <include file="/db/changelog/003-create-indexes.xml"/>
-    <include file="/db/changelog/004-load-initial-data.xml"/>
 </databaseChangeLog>
