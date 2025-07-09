@@ -1549,17 +1549,21 @@ components:
       type: object
       required:
         - name
-        - unitId
+        - description
+        - active
+        - unitIds
       properties:
         name:
           type: string
         description:
           type: string
-        unitId:
-          type: integer
-          format: int64
         active:
           type: boolean
+        unitIds:
+          type: array
+          items:
+            type: integer
+            format: int64
     BusinessDomainResponse:
       type: object
       properties:
@@ -1570,8 +1574,10 @@ components:
           type: string
         description:
           type: string
-        businessUnit:
-          $ref: '#/components/schemas/BusinessUnitResponse'
+        businessUnits:
+          type: array
+          items:
+            $ref: '#/components/schemas/BusinessUnitResponse'
         active:
           type: boolean
         createdBy:
