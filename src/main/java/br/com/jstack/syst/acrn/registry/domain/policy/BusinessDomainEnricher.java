@@ -1,7 +1,6 @@
 package br.com.jstack.syst.acrn.registry.domain.policy;
 
 import br.com.jstack.syst.acrn.registry.domain.entity.BusinessDomain;
-import br.com.jstack.syst.acrn.registry.domain.entity.BusinessUnit;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -12,8 +11,8 @@ public class BusinessDomainEnricher {
 	private final BusinessUnitPolicy businessUnitPolicy;
 	
 	public BusinessDomain enrichWithBusinessUnit(BusinessDomain domain) {
-		BusinessUnit unit = businessUnitPolicy.getValidBusinessUnit(domain.getBusinessUnit().getId());
-		domain.setBusinessUnit(unit);
+//		BusinessUnit unit = businessUnitPolicy.getValidBusinessUnit(domain.getBusinessUnit().getId());
+//		domain.setBusinessUnit(unit);
 		return domain;
 	}
 }

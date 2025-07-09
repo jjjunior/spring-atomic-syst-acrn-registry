@@ -60,7 +60,7 @@ public class BusinessDomainPersistenceAdapter implements BusinessDomainOutputPor
 		existing.setName(domain.getName());
 		existing.setDescription(domain.getDescription());
 		existing.setActive(domain.getActive());
-		existing.setBusinessUnit(domain.getBusinessUnit());
+//		existing.setBusinessUnit(domain.getBusinessUnit());
 		repository.saveAndFlush(existing);
 		return existing;
 	}

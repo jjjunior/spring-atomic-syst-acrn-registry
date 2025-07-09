@@ -4,17 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.jstack.syst.acrn.registry.domain.vo.Audit;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -51,6 +41,15 @@ public class BusinessUnit {
 	@Embedded
 	private Audit audit = new Audit();
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "businessUnit", cascade = CascadeType.ALL, orphanRemoval = true)
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+		name = "business_unit_domain",
+		joinColumns = @JoinColumn(name = "business_unit_id"),
+		inverseJoinColumns = @JoinColumn(name = "business_domain_id"),
+		uniqueConstraints = @UniqueConstraint(columnNames = {"business_unit_id", "business_domain_id"})
+	)
 	private List<BusinessDomain> businessDomains = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "businessUnit", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<BusinessUnitDomain> businessUnitDomains = new ArrayList<>();
 }
