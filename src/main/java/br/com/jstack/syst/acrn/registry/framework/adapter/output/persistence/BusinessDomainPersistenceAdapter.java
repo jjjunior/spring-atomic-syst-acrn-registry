@@ -5,7 +5,12 @@ import java.util.NoSuchElementException;
 
 import br.com.jstack.syst.acrn.registry.application.port.output.BusinessDomainOutputPort;
 import br.com.jstack.syst.acrn.registry.domain.entity.BusinessDomain;
+import br.com.jstack.syst.acrn.registry.domain.entity.BusinessUnit;
+import br.com.jstack.syst.acrn.registry.domain.entity.BusinessUnitDomain;
+import br.com.jstack.syst.acrn.registry.domain.entity.BusinessUnitDomainId;
 import br.com.jstack.syst.acrn.registry.framework.adapter.output.persistence.repository.BusinessDomainRepository;
+import br.com.jstack.syst.acrn.registry.framework.adapter.output.persistence.repository.BusinessUnitDomainRepository;
+import br.com.jstack.syst.acrn.registry.framework.adapter.output.persistence.repository.BusinessUnitRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -16,41 +21,53 @@ import org.springframework.stereotype.Component;
 @Component
 public class BusinessDomainPersistenceAdapter implements BusinessDomainOutputPort {
 	
-	private final EntityManager            entityManager;
-	private final BusinessDomainRepository repository;
+	private final EntityManager                entityManager;
+	private final BusinessDomainRepository     businessDomainRepository;
+	private final BusinessUnitRepository       businessUnitRepository;
+	private final BusinessUnitDomainRepository businessUnitDomainRepository;
 	
 	@Override
 	public boolean existsByName(String name) {
-		return repository.findByName(name).isPresent();
+		return businessDomainRepository.findByName(name).isPresent();
 	}
 	
 	@Override
 	public boolean existsByNameAndIdNot(String name, Long id) {
-		return repository.findByNameAndIdNot(name, id).isPresent();
+		return businessDomainRepository.findByNameAndIdNot(name, id).isPresent();
 	}
 	
 	@Transactional
 	@Override
 	public BusinessDomain save(BusinessDomain domain) {
-		BusinessDomain businessUnit = repository.saveAndFlush(domain);
+		BusinessDomain savedDomain = businessDomainRepository.saveAndFlush(domain);
+		entityManager.flush();
 		entityManager.clear();
-		return businessUnit;
+		
+		List<BusinessUnitDomain> relationships = domain.getBusinessUnits().stream()
+			.map(unit -> createRelationship(savedDomain, unit.getId()))
+			.toList();
+		
+		businessUnitDomainRepository.saveAll(relationships);
+		savedDomain.setBusinessUnitDomains(relationships);
+		
+		return savedDomain;
 	}
 	
 	@Override
 	public BusinessDomain findById(Long id) {
-		return repository.findById(id).orElseThrow(() -> new NoSuchElementException("Business Domain with id " + id + " not found"));
+		return businessDomainRepository.findById(id)
+			.orElseThrow(() -> new NoSuchElementException("Business Domain with id " + id + " not found"));
 	}
 	
 	@Override
 	public List<BusinessDomain> findAll() {
-		return repository.findAll(Sort.by("id").ascending());
+		return businessDomainRepository.findAll(Sort.by("id").ascending());
 	}
 	
 	@Transactional
 	@Override
-	public void deleteById(Long aLong) {
-		repository.deleteById(aLong);
+	public void deleteById(Long id) {
+		businessDomainRepository.deleteById(id);
 	}
 	
 	@Transactional
@@ -60,8 +77,19 @@ public class BusinessDomainPersistenceAdapter implements BusinessDomainOutputPor
 		existing.setName(domain.getName());
 		existing.setDescription(domain.getDescription());
 		existing.setActive(domain.getActive());
-//		existing.setBusinessUnit(domain.getBusinessUnit());
-		repository.saveAndFlush(existing);
-		return existing;
+		
+		return businessDomainRepository.saveAndFlush(existing);
+	}
+	
+	private BusinessUnitDomain createRelationship(BusinessDomain domain, Long unitId) {
+		BusinessUnit unit = businessUnitRepository.findById(unitId)
+			.orElseThrow(() -> new NoSuchElementException("Business Unit with id " + unitId + " not found"));
+		
+		BusinessUnitDomain relation = new BusinessUnitDomain();
+		relation.setBusinessDomain(domain);
+		relation.setBusinessUnit(unit);
+		relation.setId(new BusinessUnitDomainId(unit.getId(), domain.getId()));
+		
+		return relation;
 	}
 }
