@@ -1519,6 +1519,10 @@ components:
         acronymId:
           type: integer
           format: int64
+        name:
+          type: string
+        description:
+          type: string
         responsibilityId:
           type: integer
           format: int64
@@ -1535,6 +1539,10 @@ components:
             id:
               type: integer
               format: int64
+            name:
+              type: string
+            description:
+              type: string
             createdAt:
               type: string
               format: date-time

@@ -166,12 +166,14 @@
             <column name="acronym_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <column name="responsibility_id" type="BIGINT">
+            <column name="responsibility_type_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
             <column name="team_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
+            <column name="name" type="VARCHAR(150)"/>
+            <column name="description" type="TEXT"/>
             <column name="active" type="BOOLEAN" defaultValueBoolean="true"/>
             <column name="created_by" type="VARCHAR(100)"/>
             <column name="created_at" type="TIMESTAMP"/>
