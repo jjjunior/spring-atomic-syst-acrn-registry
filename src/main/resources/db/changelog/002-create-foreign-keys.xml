@@ -83,10 +83,10 @@
     <changeSet id="fk-system-acronym-resp-002" author="jota">
         <addForeignKeyConstraint
                 baseTableName="system_acronym_responsibility"
-                baseColumnNames="responsibility_id"
+                baseColumnNames="responsibility_type_id"
                 referencedTableName="responsibility_type"
                 referencedColumnNames="responsibility_type_id"
-                constraintName="fk_system_acronym_responsibility_responsibility_id"/>
+                constraintName="fk_system_acronym_responsibility_responsibility_type_id"/>
     </changeSet>
 
     <changeSet id="fk-system-acronym-resp-003" author="jota">
