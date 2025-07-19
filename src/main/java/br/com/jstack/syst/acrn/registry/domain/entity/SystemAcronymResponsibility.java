@@ -28,7 +28,7 @@ public class SystemAcronymResponsibility {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "system_acronym_responsibility_seq")
 	@SequenceGenerator(name = "system_acronym_responsibility_seq", sequenceName = "system_acronym_responsibility_system_acronym_responsibility_seq", allocationSize = 1)
-	@Column(name = "system_acronym_responsibilit_id")
+	@Column(name = "system_acronym_responsibility_id")
 	private Long id;
 	
 	@Column(name = "name", nullable = false, length = 150)
@@ -45,7 +45,7 @@ public class SystemAcronymResponsibility {
 	@JoinColumn(name = "team_id")
 	private Team team;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "acronym_id")
 	private SystemAcronym acronym;
 	

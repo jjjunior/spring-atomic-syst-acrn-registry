@@ -25,7 +25,7 @@ import lombok.Setter;
 @Table(name = "responsibility_type")
 public class ResponsibilityType {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "responsibility_type_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "responsibility_type_id_seq")
 	@SequenceGenerator(name = "responsibility_type_id_seq", sequenceName = "responsibility_type_responsibility_type_id_seq", allocationSize = 1)
 	@Column(name = "responsibility_type_id")
 	private Long id;
