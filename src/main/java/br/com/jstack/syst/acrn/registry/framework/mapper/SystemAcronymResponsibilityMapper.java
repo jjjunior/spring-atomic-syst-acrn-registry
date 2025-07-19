@@ -11,7 +11,7 @@ public interface SystemAcronymResponsibilityMapper {
 	
 	@Mapping(target = "id", ignore = true)
 	@Mapping(target = "audit", ignore = true)
-	@Mapping(target = "acronym.id",source = "acronymId")
+	@Mapping(target = "acronym.id", source = "acronymId")
 	@Mapping(target = "responsibilityType.id", source = "responsibilityId")
 	@Mapping(target = "team.id", source = "teamId")
 	@Mapping(target = "name", source = "name")

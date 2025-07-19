@@ -4,11 +4,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import br.com.jstack.syst.acrn.registry.application.port.output.SystemAcronymOutputPort;
-import br.com.jstack.syst.acrn.registry.application.port.output.SystemAcronymResponsibilityOutputPort;
 import br.com.jstack.syst.acrn.registry.domain.entity.SystemAcronym;
-import br.com.jstack.syst.acrn.registry.domain.entity.SystemAcronymResponsibility;
 import br.com.jstack.syst.acrn.registry.framework.adapter.output.persistence.repository.SystemAcronymRepository;
-import br.com.jstack.syst.acrn.registry.framework.adapter.output.persistence.repository.SystemAcronymResponsibilityRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
