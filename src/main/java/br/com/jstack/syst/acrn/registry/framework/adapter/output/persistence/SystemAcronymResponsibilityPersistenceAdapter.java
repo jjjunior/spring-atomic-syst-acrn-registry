@@ -39,9 +39,8 @@ public class SystemAcronymResponsibilityPersistenceAdapter implements SystemAcro
 	
 	@Override
 	public SystemAcronymResponsibility findById(Long id) {
-		SystemAcronymResponsibility systemAcronymType = repository.findById(id)
+		return repository.findById(id)
 			.orElseThrow(() -> new NoSuchElementException("Responsibility Type not found with id: " + id));
-		return systemAcronymType;
 	}
 	
 	@Override

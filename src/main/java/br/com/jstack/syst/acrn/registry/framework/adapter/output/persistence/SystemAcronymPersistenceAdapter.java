@@ -4,11 +4,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import br.com.jstack.syst.acrn.registry.application.port.output.SystemAcronymOutputPort;
-import br.com.jstack.syst.acrn.registry.application.port.output.SystemAcronymResponsibilityOutputPort;
 import br.com.jstack.syst.acrn.registry.domain.entity.SystemAcronym;
-import br.com.jstack.syst.acrn.registry.domain.entity.SystemAcronymResponsibility;
 import br.com.jstack.syst.acrn.registry.framework.adapter.output.persistence.repository.SystemAcronymRepository;
-import br.com.jstack.syst.acrn.registry.framework.adapter.output.persistence.repository.SystemAcronymResponsibilityRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -42,9 +39,8 @@ public class SystemAcronymPersistenceAdapter implements SystemAcronymOutputPort 
 	
 	@Override
 	public SystemAcronym findById(Long id) {
-		SystemAcronym systemAcronymType = repository.findById(id)
+		return repository.findById(id)
 			.orElseThrow(() -> new NoSuchElementException("Responsibility Type not found with id: " + id));
-		return systemAcronymType;
 	}
 	
 	@Override

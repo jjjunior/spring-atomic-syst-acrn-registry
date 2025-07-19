@@ -1,17 +1,15 @@
 package br.com.jstack.syst.acrn.registry.application.port.input;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import br.com.jstack.syst.acrn.registry.application.port.output.SystemAcronymOutputPort;
-import br.com.jstack.syst.acrn.registry.application.port.output.SystemAcronymResponsibilityOutputPort;
 import br.com.jstack.syst.acrn.registry.application.usecase.CreateUseCase;
 import br.com.jstack.syst.acrn.registry.application.usecase.DeleteByIdUseCase;
 import br.com.jstack.syst.acrn.registry.application.usecase.RetrieveAllUseCase;
 import br.com.jstack.syst.acrn.registry.application.usecase.RetrieveByIdUseCase;
 import br.com.jstack.syst.acrn.registry.application.usecase.UpdateUseCase;
 import br.com.jstack.syst.acrn.registry.domain.entity.SystemAcronym;
-import br.com.jstack.syst.acrn.registry.domain.entity.SystemAcronymResponsibility;
 import br.com.jstack.syst.acrn.registry.domain.policy.PolicyResolver;
 import br.com.jstack.syst.acrn.registry.domain.policy.ValidationPolicy;
 import br.com.jstack.syst.acrn.registry.domain.vo.OperationType;
@@ -44,7 +42,7 @@ public class SystemAcronymInputPort implements CreateUseCase<SystemAcronym>,
 	
 	@Override
 	public List<SystemAcronym> retrieveAll() {
-		return outputPort.findAll().stream().collect(Collectors.toList());
+		return new ArrayList<>(outputPort.findAll());
 	}
 	
 	@Override
