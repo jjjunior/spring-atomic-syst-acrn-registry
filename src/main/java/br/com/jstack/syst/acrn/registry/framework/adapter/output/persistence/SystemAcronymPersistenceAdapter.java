@@ -39,9 +39,9 @@ public class SystemAcronymPersistenceAdapter implements SystemAcronymOutputPort 
 	
 	@Override
 	public SystemAcronym findById(Long id) {
-		SystemAcronym systemAcronymType = repository.findById(id)
+		SystemAcronym systemAcronym = repository.findById(id)
 			.orElseThrow(() -> new NoSuchElementException("Responsibility Type not found with id: " + id));
-		return systemAcronymType;
+		return systemAcronym;
 	}
 	
 	@Override
